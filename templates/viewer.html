@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+{% block title %}Game Board{% endblock %}
+
+{% block content %}
+    {% set height = (100 / QUESTIONS_PER_CATEGORY)|int %}
+    <div class="container-game container-all container-light">
+
+        <div class="container-categories-viewer">
+            <div class="black-box flex-pad">
+                <div class="row-ceopardy flex-vertical-pad" style="height: 100%;">
+                    {% for name in categories %}
+                        <div class="col-ceopardy flex-horizontal-pad">
+                            <div id="c{{ loop.index }}" class="box-ceopardy box-category-viewer"><p>{{ name }}</p></div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="container-separator-h"></div>
+
+        <div class="container-questions-viewer">
+            <div class="black-box flex-pad">
+                {% for _r in range(1, QUESTIONS_PER_CATEGORY + 1) %}
+                    <div class="row-ceopardy flex-vertical-pad" style="height: {{ height }}%;">
+                        {% for _c in range(1, CATEGORIES_PER_GAME + 1) %}
+                            {% set answered = questions['c{}q{}'.format(_c, _r)] == True %}
+                            <div class="col-ceopardy flex-horizontal-pad">
+                                <div id="c{{ _c }}q{{ _r }}" class="box-ceopardy box-question-viewer" role="button">
+                                    <p class="{{ 'answered' if answered }}">${{ _r * SCORE_TICK }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="container-separator-h"></div>
+
+        <div class="container-results">
+            {% set select_tid = state.get('team', '') %}
+            {% for name, score in scores.items() %}
+                {% set tid = 'team{}'.format(loop.index) %}
+                <div class="container-team">
+                    <div id="{{ tid }}" class="black-box flex-pad {{ 'team-selected' if select_tid == tid }}"
+                         style="width: 80%; max-width:250px; margin: auto;">
+                        <div class="col-player flex-horizontal-pad">
+                            <div class="row-player flex-vertical-pad" style="height: 30%;">
+                                <div id="{{ tid }}-score" class="box-ceopardy box-score"><p>${{ score }}</p></div>
+                            </div>
+                            <div class="row-player flex-vertical-pad" style="height: 70%;">
+                                <div id="{{ tid }}-name" class="box-ceopardy box-team {{ tid }}-font"><p>{{ name }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="question-overlay"
+         class="container-game container-absolute container-all {{ 'no-display' if state.get('question', '') == '' }}">
+        <div class="container-question-viewer">
+            <div class="black-box flex-pad">
+                <div class="container-question-category row-ceopardy flex-vertical-pad">
+                    <div class="col-ceopardy flex-horizontal-pad">
+                        <div id="question-overlay-category" class="box-ceopardy box-category-viewer">
+                            <p>{{ active_question.get('category', '') }}</p></div>
+                    </div>
+                </div>
+                <div class="container-question row-ceopardy flex-vertical-pad">
+                    <div class="col-ceopardy flex-horizontal-pad">
+                        <div id="question-overlay-content"
+                             class="box-ceopardy box-question-viewer">{{ active_question['template']|safe }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="big-overlay"
+         class="container-game container-absolute container-all {{ 'no-display' if state.get('overlay-big', '') == '' }}">
+        <div class="big-container-overlay">
+            <div class="black-box flex-pad">
+                <div class="box-overlay">
+                    <div id="big-overlay-content"
+                         class="box-ceopardy box-question-viewer">{{ state.get('overlay-big', '')|safe }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block ui %}
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port + '/viewer');
+        var rouletteId = null;
+
+        function SelectTeam(id) {
+            clearInterval(rouletteId);
+            $(".team-selected").removeClass("team-selected");
+            $("#" + id).addClass("team-selected");
+        }
+
+        function DeselectAllTeams() {
+            $('.container-team div').removeClass('team-selected');
+        }
+
+        socket.on('connect', function () {
+            socket.emit('refresh');
+        });
+
+        socket.on('update-board', function (data) {
+            for (var id in data) {
+                if (data.hasOwnProperty(id)) {
+                    var solved = data[id];
+                    if (solved) {
+                        $(`#${id}`).children().addClass('answered');
+                    } else {
+                        $(`#${id}`).children().removeClass('answered');
+                    }
+                }
+            }
+        });
+
+        socket.on('redirect', function (data) {
+            location.href = data["url"];
+        });
+
+        socket.on('question', function (question) {
+            $("#question-overlay-content").empty();
+
+            if (question.action == "show") {
+                $("#question-overlay-category>p").text(question.category);
+                $("#question-overlay").fadeIn(1000);
+            } else {
+                $("#question-overlay").fadeOut(1000);
+            }
+        });
+
+        socket.on('nextQuestion', function (nextQuestion) {
+            $("#question-overlay-content").html(nextQuestion.content.template);
+            $("#question-overlay").fadeIn(1000);
+        })
+
+        socket.on('overlay', function (data) {
+            if (data.action == "show") {
+                $("#" + data.id + "-overlay-content").html(data.html);
+                $("#" + data.id + "-overlay").fadeIn(1000);
+            } else {
+                $("#" + data.id + "-overlay").fadeOut(1000);
+                $("#" + data.id + "-overlay-content").html(data.html);
+            }
+        });
+
+        socket.on('team', function (data) {
+            if ((data.action == "name") || (data.action == "score")) {
+                for (var key in data.args) {
+                    if (!data.args.hasOwnProperty(key)) {
+                        continue;
+                    }
+                    // No XSS with text function
+                    $('#' + key + '-' + data.action + ' > p').text(data.args[key]);
+                }
+            } else if (data.action == "select") {
+                if (data.args == null) {
+                    DeselectAllTeams();
+                } else {
+                    SelectTeam(data.args);
+                }
+            } else if (data.action == "roulette") {
+                // We might have to rethink this because a browser tab could be asleep
+                clearInterval(rouletteId);
+                rouletteId = setInterval(function () {
+                    var id = data.args.shift();
+                    $(".team-selected").removeClass("team-selected");
+                    $("#" + id).addClass("team-selected");
+                    if (data.args.length == 0) {
+                        clearInterval(rouletteId);
+                        rouletteId = null;
+                    }
+                }, 100);
+            }
+        });
+    </script>
+{% endblock %}
