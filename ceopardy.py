@@ -40,6 +40,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + config['DATABASE_FILENAME
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 socketio = SocketIO(app)
+socketio.init_app(app, cors_allowed_origins="*")
 db = SQLAlchemy(app)
 
 

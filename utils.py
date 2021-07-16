@@ -133,7 +133,7 @@ def question_to_html(question_text):
     # Transform new lines into <br>
     question_text = re.sub(r'\n', '<br/>', question_text)
 
-    return '<p class="question-and-content">' + question_text + '</p>'
+    return '<p class="question-and-content question-text">' + question_text + '</p>'
 
 
 def list_roundfiles():
@@ -160,16 +160,19 @@ def render_question_content_view(question, content):
     htmlQuestion = ''
     htmlQuestion += '<div class="question-container">'
     htmlQuestion += question_to_html(question.text)
+    htmlQuestion += '<div class="question-images-container">'
     for entry in content:
-        htmlQuestion += '<div class="question-and-content">'
+        width_class = 'mh-100'
+        if len(content) > 3:
+            width_class = 'mh-50'
         if entry.media is QuestionMedia.image:
-            htmlQuestion += '<img src="{}{}"/>'.format(config['IMAGES_FOLDER'],
+            htmlQuestion += '<img class="question-and-content {}" src="{}{}"/>'.format(width_class, config['IMAGES_FOLDER'],
                                                                      entry.content)
         elif entry.media is QuestionMedia.text:
             htmlQuestion += question_to_html(entry.content)
-        htmlQuestion += '</div>'
-    htmlQuestion+='<div class="question-and-content"></div>'
     htmlQuestion += '</div>'
+    htmlQuestion += '</div>'
+    print(htmlQuestion)
     return {'category': question.category, 'template': htmlQuestion}
 
 
