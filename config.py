@@ -23,6 +23,7 @@ config = {
     'CATEGORIES_PER_GAME': 5,
     'QUESTIONS_PER_CATEGORY': 5,
     'QUESTIONS_FILENAME': 'data/Questions.cp',
+    'QUESTIONS_FILENAME': 'data/Answers.cp',
     'IMAGES_FOLDER': 'static/data/images/',
     'SOUNDS_FOLDER': 'static/data/images/',
     'SCORE_TICK': 100,
