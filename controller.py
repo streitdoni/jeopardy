@@ -345,6 +345,13 @@ class Controller():
         return answer
 
     @staticmethod
+    def get_answer_content(qid):
+        app.logger.info(
+            "Get answer content by question id: {}".format(qid))
+
+        return AnswerContent.query.filter(AnswerContent.question_id == qid).all()
+
+    @staticmethod
     def get_question_viewid_from_dbid(question_id):
         # Sorry for the ugly name but it says it all
         question = Question.query.get(question_id)

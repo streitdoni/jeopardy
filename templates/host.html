@@ -128,13 +128,13 @@
                             <div class="container-controls form-color">
                                 <div class="question-content-view-container">
                                     <div class="question-content-view-switcher">
-                                        <div id="Next question" vId="{{ state.get('question', '') }}"
-                                             class="form-icon form-click" title="next-question">
+                                        <div id="next-question" vId="{{ state.get('question', '') }}"
+                                             class="form-icon form-click" title="Next question">
                                             <i class="fas fa-arrow-right fa-2x fa-fw"></i>
                                         </div>
                                     </div>
                                     <div class="question-content-view-switcher">
-                                        <div id="previous-Question" vId="{{ state.get('question', '') }}"
+                                        <div id="previous-question" vId="{{ state.get('question', '') }}"
                                              class="form-icon form-click"
                                              title="Previous question">
                                             <i class="fas fa-arrow-left fa-2x fa-fw"></i>
@@ -435,8 +435,8 @@
                 $("#question").html(data.content.template);
 
                 var newId = `c${data.id.c}q${data.id.q}v${data.id.v}`;
-                $("#previous-Question").attr("vId", newId);
-                $("#next-Question").attr("vId", newId);
+                $("#previous-question").attr("vId", newId);
+                $("#next-question").attr("vId", newId);
 
 
             });
@@ -452,8 +452,8 @@
                 $("#question").html(data.content.template);
 
                 var newId = `c${data.id.c}q${data.id.q}v${data.id.v}`;
-                $("#next-Question").attr("vId", newId);
-                $("#previous-Question").attr("vId", newId);
+                $("#next-question").attr("vId", newId);
+                $("#previous-question").attr("vId", newId);
                 if (data.id.v > "0") {
                     hideMessageContentNavigation(hideprev = false, hidenext = false);
                 } else {
@@ -481,9 +481,9 @@
                     $(`#${key}-range`).val(data.answer[key]);
                 }
 
-                $("#question").empty();
-                $("#next-Question").attr("vId", `${id}v0`);
-                $("#previous-Question").attr("vId", `${id}v0`);
+                $("#question").html(data.answerContent)
+                $("#next-question").attr("vId", `${id}v0`);
+                $("#previous-question").attr("vId", `${id}v0`);
                 //$("#answer-controls").removeClass("no-display");
                 $("#question-id").val(id);
                 UnlockBuzzers();
@@ -494,8 +494,8 @@
             var box = $(`#${id}`);
             box.removeClass("box-selected");
             hideMessageContentNavigation(hideprev = true, hidenext = true);
-            $("#next-Question").attr("vId", ``);
-            $("#previous-Question").attr("vId", ``);
+            $("#next-question").attr("vId", ``);
+            $("#previous-question").attr("vId", ``);
             socket.emit('question', {action: "deselect", id: id}, function (data) {
                 // Reset form values
                 $('#form-question input[type=range]').val(0);
@@ -506,16 +506,16 @@
 
         function hideMessageContentNavigation(hideprev, hidenext) {
             if (hideprev == true) {
-                $('#previous-Question').hide();
+                $('#previous-question').hide();
             }
             if (hideprev == false) {
-                $('#previous-Question').show();
+                $('#previous-question').show();
             }
             if (hidenext == true) {
-                $('#next-Question').hide();
+                $('#next-question').hide();
             }
             if (hidenext == false) {
-                $('#next-Question').show();
+                $('#next-question').show();
             }
         }
 
@@ -733,8 +733,8 @@
             });
             $('#finish-game').on("click", FinishGame);
 
-            $("#next-Question").on("click", LoadNextQuestionContent);
-            $("#previous-Question").on("click", LoadPreviousQuestionContent);
+            $("#next-question").on("click", LoadNextQuestionContent);
+            $("#previous-question").on("click", LoadPreviousQuestionContent);
             hideMessageContentNavigation(hideprev = true, hidenext = true);
 
             {# FIXME we only support 3 buzzers for now #}

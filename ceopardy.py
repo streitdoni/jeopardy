@@ -61,7 +61,7 @@ def viewer():
     question, questionContent = controller.get_active_question(ishost=False)
     contentAndCategory = {}
     if question is not None:
-        contentAndCategory = utils.render_question_content_view(question, questionContent)
+        contentAndCategory = utils.render_content_view(question.text,question.category, questionContent)
     return render_template('viewer.html', scores=scores, categories=categories,
                            questions=questions, state=state,
                            active_question=contentAndCategory)
@@ -92,7 +92,7 @@ def host():
     question, questionContent = controller.get_active_question(ishost=True)
     contentAndCategory = {}
     if question is not None:
-        contentAndCategory = utils.render_question_content_view(question, questionContent)
+        contentAndCategory = utils.render_content_view(question.text,question.category, questionContent)
 
     return render_template('host.html', scores=scores, teams=teams, form=form,
                            categories=categories, questions=questions,
@@ -206,11 +206,16 @@ def handle_question(data):
         col, row, content = utils.parse_question_id(data["id"])
         question = controller.get_question(col, row)
         answer = controller.get_answer(col, row)
+        answerContent = controller.get_answer_content(question.id)
+        htmlAnswer = {}
+        if len(answerContent) > 0:
+            htmlAnswer = utils.render_content_view(answerContent[0].text, question.category, answerContent)
         controller.set_state("question", data["id"])
         emit("question", {"action": "show",
                           "category": str(question.category)},
              namespace='/viewer', broadcast=True)
-        return {"id": "c{}q{}".format(col, row), "type": question.description, "answer": answer}
+        return {"id": "c{}q{}".format(col, row), "type": question.description, "answer": answer,
+                "answerContent": htmlAnswer['template']}
     elif data["action"] == "deselect":
         state = controller.get_questions_status_for_viewer()
         emit("update-board", state, namespace='/viewer', broadcast=True)
@@ -232,7 +237,7 @@ def handle_question_content(data):
 
     question = controller.get_question(col, row)
     questionContent = controller.get_question_content(col, row, content)
-    contentAndCategory = utils.render_question_content_view(question, questionContent)
+    contentAndCategory = utils.render_content_view(question.text, question.category, questionContent)
     controller.set_state("question", data["id"])
     emit("nextQuestion", {"content": contentAndCategory},
          namespace='/viewer', broadcast=True)

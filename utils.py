@@ -156,7 +156,7 @@ def parse_gamefile(filename):
     return categories, final
 
 
-def question_to_html(question_text):
+def to_html(question_text):
     """Parses the questions from the Beopardy Game Board format"""
     question_text = html.escape(question_text)
 
@@ -204,25 +204,25 @@ def parse_question_id(qid):
     return (col, row, content)
 
 
-def render_question_content_view(question, content):
-    htmlQuestion = ''
-    htmlQuestion += '<div class="question-container">'
-    htmlQuestion += question_to_html(question.text)
-    htmlQuestion += '<div class="question-images-container">'
+def render_content_view(headingText, category, content):
+    htmlContent = ''
+    htmlContent += '<div class="question-container">'
+    htmlContent += to_html(headingText)
+    htmlContent += '<div class="question-images-container">'
     for entry in content:
         width_class = 'question-view-mh-100'
         if len(content) > 3:
             width_class = 'question-view-mh-50'
         if entry.media is ContentMedia.image:
-            htmlQuestion += '<img class="question-and-content {}" src="{}{}"/>'.format(width_class,
+            htmlContent += '<img class="question-and-content {}" src="{}{}"/>'.format(width_class,
                                                                                        config['IMAGES_FOLDER'],
                                                                                        entry.content)
         elif entry.media is ContentMedia.text:
-            htmlQuestion += question_to_html(entry.content)
-    htmlQuestion += '</div>'
-    htmlQuestion += '</div>'
-    print(htmlQuestion)
-    return {'category': question.category, 'template': htmlQuestion}
+            htmlContent += to_html(entry.content)
+    htmlContent += '</div>'
+    htmlContent += '</div>'
+    print(htmlContent)
+    return {'category': category, 'template': htmlContent}
 
 
 class InvalidQuestionId(Exception):
