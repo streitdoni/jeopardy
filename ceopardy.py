@@ -170,10 +170,10 @@ def answer():
     app.logger.debug("Answer form has been submitted with: {}", request.form)
     data = request.form
     controller = get_controller()
-
+    qId = '{}v{}'.format(data["id"], '0')
     app.logger.debug('received data: {}'.format(data["id"]))
     try:
-        col, row = utils.parse_question_id(data["id"])
+        col, row ,content = utils.parse_question_id(qId)
     except utils.InvalidQuestionId:
         return jsonify(result="failure", error="Invalid category/question format!")
 
