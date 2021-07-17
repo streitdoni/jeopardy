@@ -74,7 +74,7 @@ def parse_questions(filename):
 
     except Exception as e:
         context = "Problem parsing the question file: {}".format(filename)
-        raise QuestionParsingError(context) from e
+        raise QuestionParsingError(context)(e)
 
     return questions
 
@@ -103,7 +103,7 @@ def parse_gamefile(filename):
 
     except Exception as e:
         context = "Problem parsing the game file: {}".format(filename)
-        raise GamefileParsingError(context) from e
+        raise GamefileParsingError(context)(e)
 
     return categories, final
 
@@ -162,9 +162,9 @@ def render_question_content_view(question, content):
     htmlQuestion += question_to_html(question.text)
     htmlQuestion += '<div class="question-images-container">'
     for entry in content:
-        width_class = 'mh-100'
+        width_class = 'question-view-mh-100'
         if len(content) > 3:
-            width_class = 'mh-50'
+            width_class = 'question-view-mh-50'
         if entry.media is QuestionMedia.image:
             htmlQuestion += '<img class="question-and-content {}" src="{}{}"/>'.format(width_class, config['IMAGES_FOLDER'],
                                                                      entry.content)
