@@ -126,16 +126,21 @@
                     <div class="box-fake-overlay">
                         <div class="box-ceopardy">
                             <div class="container-controls form-color">
-                                <div id="next-Question" vId="{{ state.get('question', '') }}"
-                                     class="form-icon form-click" title="Finish the game">
-                                    <i class="fas fa-arrow-right"></i>
+                                <div class="question-content-view-container">
+                                    <div class="question-content-view-switcher">
+                                        <div id="Next question" vId="{{ state.get('question', '') }}"
+                                             class="form-icon form-click" title="next-question">
+                                            <i class="fas fa-arrow-right fa-2x fa-fw"></i>
+                                        </div>
+                                    </div>
+                                    <div class="question-content-view-switcher">
+                                        <div id="previous-Question" vId="{{ state.get('question', '') }}"
+                                             class="form-icon form-click"
+                                             title="Previous question">
+                                            <i class="fas fa-arrow-left fa-2x fa-fw"></i>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div id="previous-Question" vId="{{ state.get('question', '') }}"
-                                     class="form-icon form-click"
-                                     title="Finish the game">
-                                    <i class="fas fa-arrow-left"></i>
-                                </div>
-                                <br>
                                 <div id="team-roulette" class="form-icon form-click" title="Random team pick">
                                     <i class="fa fa-spinner fa-2x fa-fw"></i>
                                 </div>
@@ -152,7 +157,6 @@
                                 <div id="finish-game" class="form-icon form-click" title="Finish the game">
                                     <i class="fa fa-sign-out fa-2x"></i>
                                 </div>
-
                             </div>
                         </div>
                     </div>
