@@ -122,6 +122,7 @@ def init():
         try:
             controller.setup_teams(teamnames)
             controller.setup_questions(roundfile)
+            controller.setup_answer_content()
             controller.start_game()
         except:
             app.logger.exception("Initialization error!")
@@ -173,7 +174,7 @@ def answer():
     qId = '{}v{}'.format(data["id"], '0')
     app.logger.debug('received data: {}'.format(data["id"]))
     try:
-        col, row ,content = utils.parse_question_id(qId)
+        col, row, content = utils.parse_question_id(qId)
     except utils.InvalidQuestionId:
         return jsonify(result="failure", error="Invalid category/question format!")
 

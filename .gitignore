@@ -152,3 +152,5 @@ crashlytics-build.properties
 
 # Project specific exclusions
 ceopardy.db
+*.jpg
+*.jpeg

@@ -22,12 +22,13 @@ from datetime import datetime
 from flask import current_app as app
 from sqlalchemy import and_
 
+import utils
 from ceopardy import db
 from config import config
-from model import Answer, Game, Team, GameState, Question, QuestionContent, QuestionMedia, Response, State, \
+from model import Answer, Game, Team, GameState, Question, QuestionContent, ContentMedia, AnswerContent, Response, \
+    State, \
     FinalQuestion
-from utils import parse_question_id, parse_questions, parse_gamefile, \
-    render_question_content_view, question_to_html
+from utils import parse_question_id, parse_questions, parse_gamefile, parse_answers
 
 
 class Controller():
@@ -103,7 +104,7 @@ class Controller():
 
                     question = Question(_q['text'], _q['description'], score, _cat, _row, _col)
                     db.session.add(question)
-                    _qContent =  _q['content']
+                    _qContent = _q['content']
                     for key in _qContent:
                         db.session.add(
                             QuestionContent(_qContent[key]['viewId'], _qContent[key]['type'], _qContent[key]['content'],
@@ -123,6 +124,21 @@ class Controller():
         else:
             raise GameProblem("Trying to setup a game that is already started")
         return True
+
+    def setup_answer_content(self, a_file=config['ANSWERS_FILENAME']):
+        app.logger.info("Setup questions from file: {}".format(a_file))
+        answers = parse_answers(config['BASE_DIR'] + a_file)
+
+        if len(answers) > 0:
+            for qid, answer in enumerate(answers, start=1):
+                question = Question.query.get(qid)
+
+                if question:
+                    for answerContent in answer:
+                        db.session.add(
+                            AnswerContent(answerContent['text'], answerContent['media'], answerContent['content'],
+                                          question))
+            db.session.commit()
 
     @staticmethod
     def start_game():
@@ -152,7 +168,7 @@ class Controller():
     @staticmethod
     def resume_game():
         """Resuming a game is simply allowing to start over a finished game.
-        
+
         Sometimes people click on finish by mistake or mess-up the score
         in the final round. Resuming a game enables to fix that.
         """
@@ -283,7 +299,8 @@ class Controller():
         app.logger.info(
             "Number of occurences in QuestionContent based on question_id  {}".format(questionId))
 
-        return db.session.query(QuestionContent.viewid).distinct().filter(questionId == QuestionContent.question_id).count()
+        return db.session.query(QuestionContent.viewid).distinct().filter(
+            questionId == QuestionContent.question_id).count()
 
     @staticmethod
     def get_question(column, row):
