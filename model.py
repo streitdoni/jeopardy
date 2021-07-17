@@ -91,6 +91,7 @@ class Question(db.Model):
 
     answers = db.relationship('Answer', back_populates="question")
     questionContents = db.relationship('QuestionContent')
+    answerContents = db.relationship('AnswerContent')
 
     def __init__(self, text, description, score_original, category, row, col, final=False,
                  double=False):
@@ -108,7 +109,7 @@ class Question(db.Model):
             .format(self.category, self.score_original, self.col, self.row)
 
 
-class QuestionMedia(Enum):
+class ContentMedia(Enum):
     music = 1
     image = 2
     text = 3
@@ -117,7 +118,7 @@ class QuestionMedia(Enum):
 class QuestionContent(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     viewid = db.Column(db.Integer, nullable=False)
-    media = db.Column(db.Enum(QuestionMedia), nullable=False)
+    media = db.Column(db.Enum(ContentMedia), nullable=False)
     content = db.Column(db.String(255), nullable=False)
 
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
@@ -125,6 +126,22 @@ class QuestionContent(db.Model):
 
     def __init__(self, viewid, media, content, question):
         self.viewid = viewid
+        self.media = media
+        self.content = content
+        self.question = question
+
+
+class AnswerContent(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.Integer, nullable=False)
+    media = db.Column(db.Enum(ContentMedia), nullable=False)
+    content = db.Column(db.String(255), nullable=False)
+
+    question_id = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
+    question = db.relationship('Question', back_populates="answerContents")
+
+    def __init__(self, text, media, content, question):
+        self.text = text
         self.media = media
         self.content = content
         self.question = question

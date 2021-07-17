@@ -22,7 +22,7 @@ import re
 import string
 
 from config import config
-from model import QuestionMedia
+from model import ContentMedia
 from flask import render_template
 
 
@@ -77,6 +77,54 @@ def parse_questions(filename):
         raise QuestionParsingError(context)(e)
 
     return questions
+
+
+def parse_answers(filename):
+    """Parses a answer file.
+       Returns a dict (of categories) of lists of questions (in score order)
+    """
+    # TODO should drop the old format entirely?
+    # if so use html and integrate answers into question file
+    # people can then use asciidoctor or markdown to render questions from
+    # a simpler format
+    answers = []
+    cur_category = None
+    try:
+        with open(filename, 'r') as f:
+            qId = 0
+            for line in f:
+                line = line.rstrip("\r\n")
+
+                # skip comments or whitespace lines
+                if re.match(r'^\s*(#|$)', line):
+                    continue
+
+                # it's a category
+                m = re.match(r'^>(.*)$', line)
+                if m:
+                    continue
+
+                # convert fake new-lines into real ones
+                line = re.sub(r'\\n', '\n', line)
+
+                # split answer in columns by ,'
+                entries = line.split(',')
+                answer = {}
+                answerContent = []
+                for content in entries[1:]:
+                    answer['text'] = entries[0]
+                    mediaAndContent = content.split(':', 1)
+                    answer['media'] = mediaAndContent[0]
+                    answer['content'] = mediaAndContent[1]
+                    answerContent.append(answer)
+
+                answers.append(answerContent)
+
+    except Exception as e:
+        context = "Problem parsing the answer file: {}".format(filename)
+        raise AnswerParsingError(context)(e)
+
+    return answers
 
 
 def parse_gamefile(filename):
@@ -165,10 +213,11 @@ def render_question_content_view(question, content):
         width_class = 'question-view-mh-100'
         if len(content) > 3:
             width_class = 'question-view-mh-50'
-        if entry.media is QuestionMedia.image:
-            htmlQuestion += '<img class="question-and-content {}" src="{}{}"/>'.format(width_class, config['IMAGES_FOLDER'],
-                                                                     entry.content)
-        elif entry.media is QuestionMedia.text:
+        if entry.media is ContentMedia.image:
+            htmlQuestion += '<img class="question-and-content {}" src="{}{}"/>'.format(width_class,
+                                                                                       config['IMAGES_FOLDER'],
+                                                                                       entry.content)
+        elif entry.media is ContentMedia.text:
             htmlQuestion += question_to_html(entry.content)
     htmlQuestion += '</div>'
     htmlQuestion += '</div>'
@@ -181,6 +230,10 @@ class InvalidQuestionId(Exception):
 
 
 class QuestionParsingError(Exception):
+    pass
+
+
+class AnswerParsingError(Exception):
     pass
 
 
