@@ -204,10 +204,14 @@ def parse_question_id(qid):
     return (col, row, content)
 
 
-def render_content_view(headingText, category, content):
+def deparse_question_id(qid, cid, vid):
+    return 'c{}q{}v{}'.format(qid, cid, vid)
+
+
+def render_content_and_category_view(heading, content, category):
     htmlContent = ''
     htmlContent += '<div class="question-container">'
-    htmlContent += to_html(headingText)
+    htmlContent += to_html(heading)
     htmlContent += '<div class="question-images-container">'
     for entry in content:
         width_class = 'question-view-mh-100'
@@ -215,14 +219,35 @@ def render_content_view(headingText, category, content):
             width_class = 'question-view-mh-50'
         if entry.media is ContentMedia.image:
             htmlContent += '<img class="question-and-content {}" src="{}{}"/>'.format(width_class,
-                                                                                       config['IMAGES_FOLDER'],
-                                                                                       entry.content)
+                                                                                      config['IMAGES_FOLDER'],
+                                                                                      entry.content)
         elif entry.media is ContentMedia.text:
             htmlContent += to_html(entry.content)
     htmlContent += '</div>'
     htmlContent += '</div>'
-    print(htmlContent)
-    return {'category': category, 'template': htmlContent}
+
+    return {'content': htmlContent, 'category': category}
+
+
+def render_content_view(heading, content):
+    htmlContent = ''
+    htmlContent += '<div class="question-container">'
+    htmlContent += to_html(heading)
+    htmlContent += '<div class="question-images-container">'
+    for entry in content:
+        width_class = 'question-view-mh-100'
+        if len(content) > 3:
+            width_class = 'question-view-mh-50'
+        if entry.media is ContentMedia.image:
+            htmlContent += '<img class="question-and-content {}" src="{}{}"/>'.format(width_class,
+                                                                                      config['IMAGES_FOLDER'],
+                                                                                      entry.content)
+        elif entry.media is ContentMedia.text:
+            htmlContent += to_html(entry.content)
+    htmlContent += '</div>'
+    htmlContent += '</div>'
+
+    return htmlContent
 
 
 class InvalidQuestionId(Exception):

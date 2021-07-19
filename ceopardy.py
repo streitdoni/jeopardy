@@ -58,13 +58,10 @@ def viewer():
     categories = controller.get_categories()
     questions = controller.get_questions_status_for_viewer()
     state = controller.get_complete_state()
-    question, questionContent = controller.get_active_question(ishost=False)
-    contentAndCategory = {}
-    if question is not None:
-        contentAndCategory = utils.render_content_view(question.text,question.category, questionContent)
+    question = controller.get_active_question(ishost=False)
     return render_template('viewer.html', scores=scores, categories=categories,
                            questions=questions, state=state,
-                           active_question=contentAndCategory)
+                           active_question=question)
 
 
 # TODO we must kill all client-side state on server load.
@@ -89,14 +86,11 @@ def host():
     categories = controller.get_categories()
     questions = controller.get_questions_status_for_host()
     state = controller.get_complete_state()
-    question, questionContent = controller.get_active_question(ishost=True)
-    contentAndCategory = {}
-    if question is not None:
-        contentAndCategory = utils.render_content_view(question.text,question.category, questionContent)
+    question = controller.get_active_question(ishost=True)
 
     return render_template('host.html', scores=scores, teams=teams, form=form,
                            categories=categories, questions=questions,
-                           state=state, next_question=contentAndCategory)
+                           state=state, active_question=question)
 
 
 # For now, this will give un an initial state which will avoid complications when
@@ -200,22 +194,19 @@ def answer():
 
 
 @socketio.on('question', namespace='/host')
-def handle_question(data):
+def handle_initial_question(data):
     controller = get_controller()
     if data["action"] == "select":
-        col, row, content = utils.parse_question_id(data["id"])
-        question = controller.get_question(col, row)
+        col, row, view = utils.parse_question_id(data["id"])
+        question = controller.get_question_and_content(col, row, view)
         answer = controller.get_answer(col, row)
         answerContent = controller.get_answer_content(question.id)
-        htmlAnswer = {}
-        if len(answerContent) > 0:
-            htmlAnswer = utils.render_content_view(answerContent[0].text, question.category, answerContent)
         controller.set_state("question", data["id"])
         emit("question", {"action": "show",
-                          "category": str(question.category)},
+                          "category": question.category},
              namespace='/viewer', broadcast=True)
-        return {"id": "c{}q{}".format(col, row), "type": question.description, "answer": answer,
-                "answerContent": htmlAnswer['template']}
+        return {"id": utils.deparse_question_id(col, row, view), "type": question.description, "answer": answer,
+                "content": answerContent}
     elif data["action"] == "deselect":
         state = controller.get_questions_status_for_viewer()
         emit("update-board", state, namespace='/viewer', broadcast=True)
@@ -229,20 +220,30 @@ def handle_question(data):
 @socketio.on('questionContent', namespace='/host')
 def handle_question_content(data):
     controller = get_controller()
-    col, row, content = utils.parse_question_id(data["id"])
+    col, row, vId = utils.parse_question_id(data["id"])
     if 'next' == data['action']:
-        content = int(content) + 1
+        vId = int(vId) + 1
     else:
-        content = int(content) - 1
+        vId = int(vId) - 1
 
-    question = controller.get_question(col, row)
-    questionContent = controller.get_question_content(col, row, content)
-    contentAndCategory = utils.render_content_view(question.text, question.category, questionContent)
-    controller.set_state("question", data["id"])
-    emit("nextQuestion", {"content": contentAndCategory},
+    content,lastViewId =controller.get_selected_question_view(col, row, vId)
+    controller.set_state("question", utils.deparse_question_id(col, row, vId))
+    emit("nextQuestion", {"content": content},
          namespace='/viewer', broadcast=True)
-    return {"id": {'c': col, 'q': row, 'v': str(content)}, "lastid": controller.get_view_content_count(question.id),
-            "content": contentAndCategory}
+    return {"id": utils.deparse_question_id(col, row, vId), "lastid": lastViewId,
+            "content": content}
+
+
+@socketio.on('showAnswer', namespace='/host')
+def load_answer_content(data):
+    controller = get_controller()
+    col, row, vId = utils.parse_question_id(data["id"])
+    question = controller.get_question_and_content(col, row, vId)
+    answerContent = controller.get_answer_content(question.id)
+    emit("nextQuestion", {"content": answerContent},
+         namespace='/viewer', broadcast=True)
+    return {"id": utils.deparse_question_id(col, row, vId), "lastid": controller.get_view_content_count(question.id),
+            "content": answerContent}
 
 
 @socketio.on('message', namespace='/host')

@@ -19,16 +19,17 @@ import os
 from collections import OrderedDict
 from datetime import datetime
 
+import sqlalchemy.orm
 from flask import current_app as app
 from sqlalchemy import and_
 
-import utils
 from ceopardy import db
 from config import config
 from model import Answer, Game, Team, GameState, Question, QuestionContent, ContentMedia, AnswerContent, Response, \
     State, \
     FinalQuestion
-from utils import parse_question_id, parse_questions, parse_gamefile, parse_answers
+from utils import parse_question_id, parse_questions, parse_gamefile, parse_answers, render_content_view, \
+    render_content_and_category_view
 
 
 class Controller():
@@ -286,43 +287,52 @@ class Controller():
                     .order_by(Question.col)]
 
     @staticmethod
-    def get_question_content(column, row, content):
-        app.logger.info(
-            "Type of question requested for row: {} and col: {}".format(row, column))
-        subquery = db.session.query(Question.id).filter(and_(Question.col == column, Question.row == row)).subquery()
-        test = db.session.query(QuestionContent).filter(
-            and_(subquery.c.id == QuestionContent.question_id, QuestionContent.viewid == content)).all()
-        return test
-
-    @staticmethod
     def get_view_content_count(questionId):
         app.logger.info(
-            "Number of occurences in QuestionContent based on question_id  {}".format(questionId))
+            "Number of occurences in Queactive_questionstionContent based on question_id  {}".format(questionId))
 
         return db.session.query(QuestionContent.viewid).distinct().filter(
             questionId == QuestionContent.question_id).count()
 
     @staticmethod
-    def get_question(column, row):
+    def get_selected_question_view(column, row, view):
         app.logger.info(
-            "Question requested for row: {} and col: {}".format(row, column))
+            "Next view of following question requested row: {}, col: {}, view: {}".format(row, column, view))
+        nextQuestion = Controller.get_question_and_content(column, row, view)
+        lastViewId = Controller.get_view_content_count(nextQuestion.id)
+        content = {}
+        if (int(view) > 0):
+            content = render_content_view(nextQuestion.text, nextQuestion.questionContents)
 
-        condition = and_(Question.row == row, Question.col == column)
-        return Question.query.filter(condition).one()
+        return content, lastViewId
+
+    @staticmethod
+    def get_question_and_content(column, row, view):
+        app.logger.info(
+            "Question requested for row: {}, col: {}, view: {}".format(row, column, view))
+
+        if int(view) > 0:
+            condition = and_(Question.row == row, Question.col == column,
+                             Question.questionContents.any(QuestionContent.viewid == view))
+            return db.session.query(Question).filter(condition).one()
+        else:
+            condition = and_(Question.row == row, Question.col == column)
+            return Question.query.options(sqlalchemy.orm.noload(Question.questionContents)).filter(
+                condition).one()
 
     @staticmethod
     def get_active_question(ishost):
 
         qid = Controller.get_complete_state().get('question', '')
+        question = {}
         if qid != '':
-            col, row, content = parse_question_id(qid)
-            question = Controller.get_question(col, row)
-            if ishost:
-                content = str(int(content) + 1)
-            questionContent = Controller.get_question_content(col, row, content)
-            return question, questionContent
-        else:
-            return None, None
+            col, row, view = parse_question_id(qid)
+
+            question = Controller.get_question_and_content(col, row, view)
+            if len(question.questionContents) > 0 and int(view) != 0:
+                question = render_content_and_category_view(question.text, question.questionContents)
+
+        return question
 
     @staticmethod
     def is_final_question():
@@ -349,7 +359,8 @@ class Controller():
         app.logger.info(
             "Get answer content by question id: {}".format(qid))
 
-        return AnswerContent.query.filter(AnswerContent.question_id == qid).all()
+        answers = AnswerContent.query.filter(AnswerContent.question_id == qid).all()
+        return render_content_view(answers[0].text, answers)
 
     @staticmethod
     def get_question_viewid_from_dbid(question_id):
@@ -416,7 +427,7 @@ class Controller():
         results = {}
         for question in questions:
             _row, _col, _answer = question
-            qid = "c{}q{}".format(_col, _row)
+            qid = "c{}q{}v0".format(_col, _row)
             # if new entry, add list
             if results.get(qid) is None:
                 results[qid] = {}

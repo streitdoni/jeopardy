@@ -67,13 +67,13 @@
                 <div class="container-question-category row-ceopardy flex-vertical-pad">
                     <div class="col-ceopardy flex-horizontal-pad">
                         <div id="question-overlay-category" class="box-ceopardy box-category-viewer">
-                            <p>{{ active_question.get('category', '') }}</p></div>
+                            <p>{{ active_question.get('category', '')  }}</p></div>
                     </div>
                 </div>
                 <div class="container-question row-ceopardy flex-vertical-pad">
                     <div class="col-ceopardy flex-horizontal-pad">
                         <div id="question-overlay-content"
-                             class="box-ceopardy box-question-viewer">{{ active_question['template']|safe }}</div>
+                             class="box-ceopardy box-question-viewer">{{ active_question.get('content','') }}</div>
                     </div>
                 </div>
             </div>
@@ -141,7 +141,7 @@
         });
 
         socket.on('nextQuestion', function (nextQuestion) {
-            $("#question-overlay-content").html(nextQuestion.content.template);
+            $("#question-overlay-content").html(nextQuestion.content);
             $("#question-overlay").fadeIn(1000);
         })
 

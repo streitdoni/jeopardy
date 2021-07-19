@@ -483,6 +483,7 @@ svg:hover polygon {
 
 .question-view-mh-100 {
     max-height: 100%;
+    margin-bottom:1%;
 }
 
 .question-view-mh-50 {
@@ -498,7 +499,7 @@ img {
 }
 
 .question-content-view-container {
-    height: 70px;
+    height: 105px;
     width: 50px;
     border: 3px solid #000000;
     border-radius: 0.50rem;
@@ -507,7 +508,7 @@ img {
 }
 
 .question-content-view-container .question-content-view-switcher {
-    height: 50%;
+    height: 33.3%;
 }
 
 .container-question-viewer {

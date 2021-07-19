@@ -88,7 +88,7 @@
                              qstyle="height: {{ height }}%;">
                             {% for _c in range(1, CATEGORIES_PER_GAME + 1) %}
                                 <div class="col-ceopardy flex-horizontal-small-pad">
-                                    {% set qid = 'c{}q{}'.format(_c, _r) %}
+                                    {% set qid = 'c{}q{}v0'.format(_c, _r) %}
                                     <div id="{{ qid }}"
                                          class="box-ceopardy box-question-host {{ 'box-selected' if qid == select_qid }} {{ 'box-answered' if questions[qid] }}">
                                         <div class="box-question-left">
@@ -127,6 +127,12 @@
                         <div class="box-ceopardy">
                             <div class="container-controls form-color">
                                 <div class="question-content-view-container">
+                                    <div class="question-content-view-switcher">
+                                        <div id="show-answer" vId="{{ state.get('question', '') }}"
+                                             class="form-icon form-click" title="Next question">
+                                            <i class="fas fa-exclamation fa-2x fa-fw"></i>
+                                        </div>
+                                    </div>
                                     <div class="question-content-view-switcher">
                                         <div id="next-question" vId="{{ state.get('question', '') }}"
                                              class="form-icon form-click" title="Next question">
@@ -230,8 +236,7 @@
                     <div class="box-fake-overlay">
                         <div id="question"
                              class="box-ceopardy box-question-host">
-                            {% if 'template' in next_question %}{{ next_question['template'] }}{% else %}
-                                {{ '' }}{% endif %}</div>
+                            {{ active_question.get('content', '')|safe }}</div>
                     </div>
                 </div>
             </div>
@@ -427,16 +432,17 @@
             var id = $(this).attr('vId');
             socket.emit('questionContent', {action: "next", id: id}, function (data) {
 
-                if (data.lastid == data.id.v) {
+                vId = parseInt(data.id.substring(data.id.indexOf('v') + 1));
+                if (data.lastid == vId) {
                     hideMessageContentNavigation(hideprev = false, hidenext = true);
                 } else {
                     hideMessageContentNavigation(hideprev = false, hidenext = false);
                 }
-                $("#question").html(data.content.template);
+                $("#question").html(data.content);
 
-                var newId = `c${data.id.c}q${data.id.q}v${data.id.v}`;
-                $("#previous-question").attr("vId", newId);
-                $("#next-question").attr("vId", newId);
+                $("#previous-question").attr("vId", data.id);
+                $("#next-question").attr("vId", data.id);
+                $("#show-answer").attr("vId", data.id);
 
 
             });
@@ -445,22 +451,35 @@
 
         function LoadPreviousQuestionContent(event) {
             var id = $(this).attr('vId');
-            vId = parseInt(id.substring(id.indexOf('v') + 1));
-
             socket.emit('questionContent', {action: "prev", id: id}, function (data) {
 
-                $("#question").html(data.content.template);
 
-                var newId = `c${data.id.c}q${data.id.q}v${data.id.v}`;
-                $("#next-question").attr("vId", newId);
-                $("#previous-question").attr("vId", newId);
+                $("#next-question").attr("vId", data.id);
+                $("#previous-question").attr("vId", data.id);
+                $("#show-answer").attr("vId", data.id);
                 if (data.id.v > "0") {
                     hideMessageContentNavigation(hideprev = false, hidenext = false);
+                    $("#question").html(data.content);
                 } else {
                     hideMessageContentNavigation(hideprev = true, hidenext = false);
+                    $("#question").empty();
                 }
             });
 
+
+        }
+
+        function LoadAnswer(event) {
+            var id = $(this).attr('vId');
+
+            socket.emit('showAnswer', {id: id}, function (data) {
+
+                $("#question").html(data.content)
+                $("#next-question").attr("vId", data.id);
+                $("#previous-question").attr("vId", data.id);
+                $("#show-answer").attr("vId", data.id);
+                $("#question-id").val(id);
+            });
 
         }
 
@@ -470,7 +489,7 @@
             box.addClass("box-selected");
             hideMessageContentNavigation(hideprev = true, hidenext = false);
 
-            socket.emit('question', {action: "select", id: `${id}v0`}, function (data) {
+            socket.emit('question', {action: "select", id: id}, function (data) {
                 // Reset all to middle
                 $('.team-range').val(0);
                 // Now adjust
@@ -481,9 +500,11 @@
                     $(`#${key}-range`).val(data.answer[key]);
                 }
 
-                $("#question").html(data.answerContent)
-                $("#next-question").attr("vId", `${id}v0`);
-                $("#previous-question").attr("vId", `${id}v0`);
+
+                $("#question").html(data.content)
+                $("#next-question").attr("vId", data.id);
+                $("#previous-question").attr("vId", data.id);
+                $("#show-answer").attr("vId", data.id);
                 //$("#answer-controls").removeClass("no-display");
                 $("#question-id").val(id);
                 UnlockBuzzers();
@@ -516,6 +537,12 @@
             }
             if (hidenext == false) {
                 $('#next-question').show();
+            }
+
+            if (hideprev == false || hidenext == false) {
+                $('#show-answer').show();
+            } else {
+                $('#show-answer').hide();
             }
         }
 
@@ -735,7 +762,13 @@
 
             $("#next-question").on("click", LoadNextQuestionContent);
             $("#previous-question").on("click", LoadPreviousQuestionContent);
-            hideMessageContentNavigation(hideprev = true, hidenext = true);
+            $("#show-answer").on("click", LoadAnswer);
+            if (($('.box-selected').length) > 0) {
+                hideMessageContentNavigation(hideprev = true, hidenext = false);
+            } else {
+
+                hideMessageContentNavigation(hideprev = true, hidenext = true);
+            }
 
             {# FIXME we only support 3 buzzers for now #}
             $(document).keypress(function (e) {
