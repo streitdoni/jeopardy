@@ -487,6 +487,7 @@ svg:hover polygon {
     max-height: 100%;
     overflow: auto;
     margin: 10px;
+    padding-bottom: 2%;
 }
 
 .question-view-mh-50 {
@@ -513,7 +514,8 @@ img {
 .question-content-container >.question-content-text{
     word-wrap: break-word;
     font-size:35px;
-    border: 5px solid green;
+    border: 5px solid #000181;
+    background-color: #000181;
     padding: 12px;
     margin: 4px;
     min-height: 150px;
