@@ -527,7 +527,7 @@
         }
 
         function LoadAnswer(event) {
-            var id = $(this).attr('vId');
+            var id = $(this).parent().parent().attr('vId');
 
             socket.emit('showAnswer', {id: id}, function (data) {
 
