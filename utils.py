@@ -16,6 +16,7 @@
 # GNU General Public License for more details.
 #
 import glob
+
 import html
 import os
 import re
@@ -156,32 +157,23 @@ def parse_gamefile(filename):
     return categories, final
 
 
-def to_html(question_text):
+def escape_html_conform(text):
     """Parses the questions from the Beopardy Game Board format"""
-    question_text = html.escape(question_text)
+    text = html.escape(text)
 
     # Warning, we don't support nested line heading options
     # UTF-8 is just killed since everything is UTF-8 now
-    if question_text.startswith('[utf8]'):
-        question_text = question_text.lstrip('[utf8]')
+    if text.startswith('[utf8]'):
+        text = text.lstrip('[utf8]')
 
     # Fixed width strings
-    if question_text.startswith('[fixed]'):
-        question_text = question_text.lstrip('[fixed]')
-        question_text = "<tt>{}</tt>".format(question_text)
-
-    # Parsing images
-    m = re.search(r'^\[img:([^\]]*)\]$', question_text)
-    if m:
-        # TODO file names will have to be hard to guess if we go multi-client
-        # TODO push style into CSS
-        return '<img src="/static/game-media/{}" width="100%" style="max-height: 100%; max-width: 100%; object-fit: contain;">'.format(
-            m.group(1))
+    if text.startswith('[fixed]'):
+        text = text.lstrip('[fixed]')
+        text = "<tt>{}</tt>".format(text)
 
     # Transform new lines into <br>
-    question_text = re.sub(r'\n', '<br/>', question_text)
-
-    return '<p class="question-and-content question-text">' + question_text + '</p>'
+    text = re.sub(r'\n', '<br/>', text)
+    return text
 
 
 def list_roundfiles():
@@ -208,46 +200,33 @@ def deparse_question_id(qid, cid, vid):
     return 'c{}q{}v{}'.format(qid, cid, vid)
 
 
-def render_content_and_category_view(heading, content, category):
+def render_content_view(heading, content, category=None):
     htmlContent = ''
     htmlContent += '<div class="question-container">'
-    htmlContent += to_html(heading)
-    htmlContent += '<div class="question-images-container">'
-    for entry in content:
-        width_class = 'question-view-mh-100'
-        if len(content) > 3:
-            width_class = 'question-view-mh-50'
-        if entry.media is ContentMedia.image:
-            htmlContent += '<img class="question-and-content {}" src="{}{}"/>'.format(width_class,
-                                                                                      config['IMAGES_FOLDER'],
-                                                                                      entry.content)
-        elif entry.media is ContentMedia.text:
-            htmlContent += to_html(entry.content)
-    htmlContent += '</div>'
-    htmlContent += '</div>'
+    escapedtext = escape_html_conform(heading)
 
-    return {'content': htmlContent, 'category': category}
+    htmlContent += '<p class="question-and-content question-text">{}</p>'.format(escapedtext)
+    if len(content)>0:
+        htmlContent += '<div class="question-content-container">'
+        for entry in content:
+            width_class = 'question-view-mh-100'
+            if len(content) > 3:
+                width_class = 'question-view-mh-50'
 
-
-def render_content_view(heading, content):
-    htmlContent = ''
-    htmlContent += '<div class="question-container">'
-    htmlContent += to_html(heading)
-    htmlContent += '<div class="question-images-container">'
-    for entry in content:
-        width_class = 'question-view-mh-100'
-        if len(content) > 3:
-            width_class = 'question-view-mh-50'
-        if entry.media is ContentMedia.image:
-            htmlContent += '<img class="question-and-content {}" src="{}{}"/>'.format(width_class,
-                                                                                      config['IMAGES_FOLDER'],
-                                                                                      entry.content)
-        elif entry.media is ContentMedia.text:
-            htmlContent += to_html(entry.content)
+            if entry.media is ContentMedia.image:
+                htmlContent += '<img class="question-and-content {}" src="{}{}"/>'.format(width_class,
+                                                                                          config['IMAGES_FOLDER'],
+                                                                                          entry.content)
+            elif entry.media is ContentMedia.text:
+                escapedtext = escape_html_conform(entry.content)
+                htmlContent += '<p class="question-and-content question-content-text {}">{}</p>'.format(width_class,
+                                                                                                        escapedtext)
+        htmlContent += '</div>'
     htmlContent += '</div>'
-    htmlContent += '</div>'
-
-    return htmlContent
+    if category:
+        return {'content': htmlContent, 'category': category}
+    else:
+        return htmlContent
 
 
 class InvalidQuestionId(Exception):

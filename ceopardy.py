@@ -205,7 +205,7 @@ def handle_initial_question(data):
         emit("question", {"action": "show",
                           "category": question.category},
              namespace='/viewer', broadcast=True)
-        return {"id": utils.deparse_question_id(col, row, view), "type": question.description, "answer": answer,
+        return {"id": utils.deparse_question_id(col, row, view), "answer": answer,
                 "content": answerContent}
     elif data["action"] == "deselect":
         state = controller.get_questions_status_for_viewer()

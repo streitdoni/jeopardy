@@ -73,7 +73,7 @@
                 <div class="container-question row-ceopardy flex-vertical-pad">
                     <div class="col-ceopardy flex-horizontal-pad">
                         <div id="question-overlay-content"
-                             class="box-ceopardy box-question-viewer">{{ active_question.get('content','') }}</div>
+                             class="box-ceopardy box-question-viewer">{{ active_question.get('content','') |safe }}</div>
                     </div>
                 </div>
             </div>

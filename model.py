@@ -81,7 +81,7 @@ class QuestionType(Enum):
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(255), nullable=False)
-    description = db.Column(db.String(255), nullable=False)
+    viewtype = db.Column(db.String(255), nullable=False)
     score_original = db.Column(db.Integer)
     category = db.Column(db.String(80))
     final = db.Column(db.Boolean)
@@ -93,10 +93,10 @@ class Question(db.Model):
     questionContents = db.relationship('QuestionContent')
     answerContents = db.relationship('AnswerContent')
 
-    def __init__(self, text, description, score_original, category, row, col, final=False,
+    def __init__(self, text, viewtype, score_original, category, row, col, final=False,
                  double=False):
         self.text = text
-        self.description = description
+        self.viewtype = viewtype
         self.score_original = score_original
         self.category = category
         self.row = row

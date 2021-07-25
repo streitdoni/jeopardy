@@ -22,14 +22,14 @@ from datetime import datetime
 import sqlalchemy.orm
 from flask import current_app as app
 from sqlalchemy import and_
+from sqlalchemy.sql.functions import current_date
 
 from ceopardy import db
 from config import config
 from model import Answer, Game, Team, GameState, Question, QuestionContent, ContentMedia, AnswerContent, Response, \
     State, \
     FinalQuestion
-from utils import parse_question_id, parse_questions, parse_gamefile, parse_answers, render_content_view, \
-    render_content_and_category_view
+from utils import parse_question_id, parse_questions, parse_gamefile, parse_answers, render_content_view
 
 
 class Controller():
@@ -291,8 +291,13 @@ class Controller():
         app.logger.info(
             "Number of occurences in Queactive_questionstionContent based on question_id  {}".format(questionId))
 
-        return db.session.query(QuestionContent.viewid).distinct().filter(
+        lastId = db.session.query(QuestionContent.viewid).distinct().filter(
             questionId == QuestionContent.question_id).count()
+
+        if lastId == 0:
+            return 1
+        else:
+            return lastId
 
     @staticmethod
     def get_selected_question_view(column, row, view):
@@ -301,8 +306,16 @@ class Controller():
         nextQuestion = Controller.get_question_and_content(column, row, view)
         lastViewId = Controller.get_view_content_count(nextQuestion.id)
         content = {}
-        if (int(view) > 0):
-            content = render_content_view(nextQuestion.text, nextQuestion.questionContents)
+        viewId = int(view)
+
+        if viewId > 0:
+            questionContents = []
+
+            for questionContent in nextQuestion.questionContents:
+
+                if questionContent.viewid == viewId:
+                    questionContents.append(questionContent)
+            content = render_content_view(nextQuestion.text, questionContents)
 
         return content, lastViewId
 
@@ -312,9 +325,7 @@ class Controller():
             "Question requested for row: {}, col: {}, view: {}".format(row, column, view))
 
         if int(view) > 0:
-            condition = and_(Question.row == row, Question.col == column,
-                             Question.questionContents.any(QuestionContent.viewid == view))
-            return db.session.query(Question).filter(condition).one()
+            return Question.query.filter(and_(Question.row == row, Question.col == column)).one()
         else:
             condition = and_(Question.row == row, Question.col == column)
             return Question.query.options(sqlalchemy.orm.noload(Question.questionContents)).filter(
@@ -324,15 +335,16 @@ class Controller():
     def get_active_question(ishost):
 
         qid = Controller.get_complete_state().get('question', '')
-        question = {}
+        htmlQuestion = {}
         if qid != '':
             col, row, view = parse_question_id(qid)
 
-            question = Controller.get_question_and_content(col, row, view)
-            if len(question.questionContents) > 0 and int(view) != 0:
-                question = render_content_and_category_view(question.text, question.questionContents)
+            if int(view) > 0:
+                question = Controller.get_question_and_content(col, row, view)
+                htmlQuestion = render_content_view(question.text, question.questionContents,
+                                                   question.category)
 
-        return question
+        return htmlQuestion
 
     @staticmethod
     def is_final_question():
