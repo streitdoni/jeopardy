@@ -222,8 +222,8 @@ def render_content_view(heading, content, category=None):
                 htmlContent += '<p class="question-and-content question-content-text {}">{}</p>'.format(width_class,
                                                                                                         escapedtext)
             elif entry.media is ContentMedia.music:
-                htmlContent += '<img class="question-and-content question-view-mh-100" src="{}"/><audio id="currentQuestionSound" src="{}{}" type="audio/mp3" preload="auto"></audio>'.format(
-                    config['SOUND_ANIMATION'], config['SOUNDS_FOLDER'], entry.content)
+                htmlContent += '<img class="question-and-content {}" src="{}"/><audio id="currentQuestionSound" src="{}{}" type="audio/mp3" preload="auto"></audio>'.format(
+                    width_class, config['SOUND_ANIMATION'], config['SOUNDS_FOLDER'], entry.content)
         htmlContent += '</div>'
     htmlContent += '</div>'
     if category:
