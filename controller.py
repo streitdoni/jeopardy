@@ -338,10 +338,17 @@ class Controller():
         htmlQuestion = {}
         if qid != '':
             col, row, view = parse_question_id(qid)
-
+            viewId=int(view)
             if int(view) > 0:
                 question = Controller.get_question_and_content(col, row, view)
-                htmlQuestion = render_content_view(question.text, question.questionContents,
+                questionContents = []
+
+                for questionContent in question.questionContents:
+
+                    if questionContent.viewid == viewId:
+                        questionContents.append(questionContent)
+
+                htmlQuestion = render_content_view(question.text, questionContents,
                                                    question.category)
 
         return htmlQuestion

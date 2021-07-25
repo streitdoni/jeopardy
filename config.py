@@ -25,7 +25,8 @@ config = {
     'QUESTIONS_FILENAME': 'data/Questions.cp',
     'ANSWERS_FILENAME': 'data/Answers.cp',
     'IMAGES_FOLDER': 'static/data/images/',
-    'SOUNDS_FOLDER': 'static/data/images/',
+    'SOUNDS_FOLDER': 'static/data/sounds/',
+    'SOUND_ANIMATION':'static/data/images/mp3bars.gif',
     'SCORE_TICK': 100,
     'MESSAGES': [ \
         {"title": "Game not started",

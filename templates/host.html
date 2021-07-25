@@ -126,24 +126,47 @@
                     <div class="box-fake-overlay">
                         <div class="box-ceopardy">
                             <div class="container-controls form-color">
-                                <div class="question-content-view-container">
+                                <div class="question-content-view-container" vId="{{ state.get('question', '') }}">
                                     <div class="question-content-view-switcher">
-                                        <div id="show-answer" vId="{{ state.get('question', '') }}"
-                                             class="form-icon form-click" title="Next question">
+                                        <div id="show-answer"
+                                             class="form-icon form-click" title="Show answer">
                                             <i class="fas fa-exclamation fa-2x fa-fw"></i>
                                         </div>
                                     </div>
                                     <div class="question-content-view-switcher">
-                                        <div id="next-question" vId="{{ state.get('question', '') }}"
+                                        <div id="next-question"
                                              class="form-icon form-click" title="Next question">
                                             <i class="fas fa-arrow-right fa-2x fa-fw"></i>
                                         </div>
                                     </div>
                                     <div class="question-content-view-switcher">
-                                        <div id="previous-question" vId="{{ state.get('question', '') }}"
+                                        <div id="previous-question"
                                              class="form-icon form-click"
                                              title="Previous question">
                                             <i class="fas fa-arrow-left fa-2x fa-fw"></i>
+                                        </div>
+                                    </div>
+                                    <div class="question-content-music-container" vId="{{ state.get('question', '') }}">
+                                        <div class="question-content-music-control">
+                                            <div id="play-sound"
+                                                 class="form-icon form-click"
+                                                 title="Play sound">
+                                                <i class="fas fa-play fa-2x fa-fw"></i>
+                                            </div>
+                                        </div>
+                                        <div class="question-content-music-control">
+                                            <div id="pause-sound"
+                                                 class="form-icon form-click"
+                                                 title="Pause sound">
+                                                <i class="fas fa-pause fa-2x fa-fw"></i>
+                                            </div>
+                                        </div>
+                                        <div class="question-content-music-control">
+                                            <div id="stop-sound"
+                                                 class="form-icon form-click"
+                                                 title="Stop sound">
+                                                <i class="fas fa-stop fa-2x fa-fw"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -429,7 +452,7 @@
         }
 
         function LoadNextQuestionContent(event) {
-            var id = $(this).attr('vId');
+            var id = $(this).parent().parent().attr('vId');
             socket.emit('questionContent', {action: "next", id: id}, function (data) {
 
                 vId = parseInt(data.id.substring(data.id.indexOf('v') + 1));
@@ -439,24 +462,58 @@
                     hideMessageContentNavigation(hideprev = false, hidenext = false);
                 }
                 $("#question").html(data.content);
-
-                $("#previous-question").attr("vId", data.id);
-                $("#next-question").attr("vId", data.id);
-                $("#show-answer").attr("vId", data.id);
+                $(".question-content-view-container").attr("vId", data.id);
 
 
             });
 
         }
 
+        function PlaySoundOfQuestion(event) {
+
+            if ($("#currentQuestionSound").attr("src") == "") {
+                var id = $(this).parent().parent().attr('vId');
+                socket.emit('question', {action: "next", id: id}, function (data) {
+
+                    vId = parseInt(data.id.substring(data.id.indexOf('v') + 1));
+                    if (data.lastid == vId) {
+                        hideMessageContentNavigation(hideprev = false, hidenext = true);
+                    } else {
+                        hideMessageContentNavigation(hideprev = false, hidenext = false);
+                    }
+                    $("#question").html(data.content);
+                    $(".question-content-view-container").attr("vId", data.id);
+                    $("#currentQuestionSound").attr('src', data.sound)
+                    $("#currentQuestionSound").get(0).play();
+                });
+            } else {
+                var audio = $("#currentQuestionSound").get(0);
+
+                if (audio.paused || audio.currentTime == 0) {
+                    audio.play();
+                }
+            }
+        }
+
+        function PauseSoundOfQuestion(event) {
+            var audio = $("#currentQuestionSound").get(0);
+            audio.pause();
+
+        }
+
+        function StopSoundOfQuestion(event) {
+            var audio = $("#currentQuestionSound").get(0);
+            audio.pause();
+            audio.currentTime = 0;
+
+        }
+
         function LoadPreviousQuestionContent(event) {
-            var id = $(this).attr('vId');
+            var id = $(this).parent().parent().attr('vId');
             socket.emit('questionContent', {action: "prev", id: id}, function (data) {
 
 
-                $("#next-question").attr("vId", data.id);
-                $("#previous-question").attr("vId", data.id);
-                $("#show-answer").attr("vId", data.id);
+                $(".question-content-view-container").attr("vId", data.id);
                 if (data.id.v > "0") {
                     hideMessageContentNavigation(hideprev = false, hidenext = false);
                     $("#question").html(data.content);
@@ -475,9 +532,7 @@
             socket.emit('showAnswer', {id: id}, function (data) {
 
                 $("#question").html(data.content)
-                $("#next-question").attr("vId", data.id);
-                $("#previous-question").attr("vId", data.id);
-                $("#show-answer").attr("vId", data.id);
+                $(".question-content-view-container").attr("vId", data.id);
                 $("#question-id").val(id);
             });
 
@@ -502,9 +557,7 @@
 
 
                 $("#question").html(data.content)
-                $("#next-question").attr("vId", data.id);
-                $("#previous-question").attr("vId", data.id);
-                $("#show-answer").attr("vId", data.id);
+                $(".question-content-view-container").attr("vId", data.id);
                 //$("#answer-controls").removeClass("no-display");
                 $("#question-id").val(id);
                 UnlockBuzzers();
@@ -515,8 +568,8 @@
             var box = $(`#${id}`);
             box.removeClass("box-selected");
             hideMessageContentNavigation(hideprev = true, hidenext = true);
-            $("#next-question").attr("vId", ``);
-            $("#previous-question").attr("vId", ``);
+            $(".question-content-view-container").attr("vId", ``);
+
             socket.emit('question', {action: "deselect", id: id}, function (data) {
                 // Reset form values
                 $('#form-question input[type=range]').val(0);
@@ -763,8 +816,12 @@
             $("#next-question").on("click", LoadNextQuestionContent);
             $("#previous-question").on("click", LoadPreviousQuestionContent);
             $("#show-answer").on("click", LoadAnswer);
+            $("#play-sound").on("click", PlaySoundOfQuestion);
+            $("#pause-sound").on("click", PauseSoundOfQuestion);
+            $("#stop-sound").on("click", StopSoundOfQuestion);
             if (($('.box-selected').length) > 0) {
                 hideMessageContentNavigation(hideprev = true, hidenext = false);
+                $('.')
             } else {
 
                 hideMessageContentNavigation(hideprev = true, hidenext = true);

@@ -206,7 +206,7 @@ def render_content_view(heading, content, category=None):
     escapedtext = escape_html_conform(heading)
 
     htmlContent += '<p class="question-and-content question-text">{}</p>'.format(escapedtext)
-    if len(content)>0:
+    if len(content) > 0:
         htmlContent += '<div class="question-content-container">'
         for entry in content:
             width_class = 'question-view-mh-100'
@@ -221,6 +221,9 @@ def render_content_view(heading, content, category=None):
                 escapedtext = escape_html_conform(entry.content)
                 htmlContent += '<p class="question-and-content question-content-text {}">{}</p>'.format(width_class,
                                                                                                         escapedtext)
+            elif entry.media is ContentMedia.music:
+                htmlContent += '<img class="question-and-content question-view-mh-100" src="{}"/><audio id="currentQuestionSound" src="{}{}" type="audio/mp3" preload="auto"></audio>'.format(
+                    config['SOUND_ANIMATION'], config['SOUNDS_FOLDER'], entry.content)
         htmlContent += '</div>'
     htmlContent += '</div>'
     if category:
