@@ -512,9 +512,9 @@
             var id = $(this).parent().parent().attr('vId');
             socket.emit('questionContent', {action: "prev", id: id}, function (data) {
 
-
                 $(".question-content-view-container").attr("vId", data.id);
-                if (data.id.v > "0") {
+                vId = parseInt(data.id.substring(data.id.indexOf('v') + 1));
+                if (vId > "0") {
                     hideMessageContentNavigation(hideprev = false, hidenext = false);
                     $("#question").html(data.content);
                 } else {
