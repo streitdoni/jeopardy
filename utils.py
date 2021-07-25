@@ -23,7 +23,7 @@ import re
 import string
 
 from config import config
-from model import ContentMedia
+from model import ContentMedia, ViewAnswerType
 from flask import render_template
 
 
@@ -60,7 +60,7 @@ def parse_questions(filename):
                 # it's a question, split type and question
                 question = {}
                 questionContent = {}
-                entries = line.split(',')
+                entries = line.split(';')
                 question['description'] = entries[0]
                 question['text'] = entries[1]
                 i = 0
@@ -109,10 +109,11 @@ def parse_answers(filename):
                 line = re.sub(r'\\n', '\n', line)
 
                 # split answer in columns by ,'
-                entries = line.split(',')
-                answer = {}
+                entries = line.split(';')
+
                 answerContent = []
                 for content in entries[1:]:
+                    answer = {}
                     answer['text'] = entries[0]
                     mediaAndContent = content.split(':', 1)
                     answer['media'] = mediaAndContent[0]
@@ -198,6 +199,29 @@ def parse_question_id(qid):
 
 def deparse_question_id(qid, cid, vid):
     return 'c{}q{}v{}'.format(qid, cid, vid)
+
+
+def render_answer_view(answerViewType, heading, answers):
+    if answerViewType is ViewAnswerType.TextAndContent:
+        return render_content_view(heading, answers)
+    elif answerViewType is ViewAnswerType.ListOfText:
+
+        htmlContent = ''
+        htmlContent += '<div class="question-container">'
+        escapedtext = escape_html_conform(heading)
+
+        htmlContent += '<p class="question-and-content question-text">{}</p>'.format(escapedtext)
+        if len(answers) > 0:
+            num = 1
+            htmlContent += '<div class="question-content-container">'
+            for answer in answers:
+                htmlContent += '<p class="answer-text-list-content answer-content-list-text-item">{}. {}</p>'.format(
+                    num,
+                    answer.content)
+                num = num + 1
+            htmlContent += '</div>'
+        htmlContent += '</div>'
+        return htmlContent
 
 
 def render_content_view(heading, content, category=None):

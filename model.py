@@ -72,16 +72,16 @@ class Team(db.Model):
         return '<Team %r>' % self.name
 
 
-class QuestionType(Enum):
-    Standard = 'S'
-    image = 2
-    text = 3
+class ViewAnswerType(Enum):
+    TextAndContent = 0
+    ListOfText = 1
+    NoAnswer = 2
 
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(255), nullable=False)
-    viewtype = db.Column(db.String(255), nullable=False)
+    view_answer_type = db.Column(db.Enum(ViewAnswerType))
     score_original = db.Column(db.Integer)
     category = db.Column(db.String(80))
     final = db.Column(db.Boolean)
@@ -93,10 +93,10 @@ class Question(db.Model):
     questionContents = db.relationship('QuestionContent')
     answerContents = db.relationship('AnswerContent')
 
-    def __init__(self, text, viewtype, score_original, category, row, col, final=False,
+    def __init__(self, text, view_answer_type, score_original, category, row, col, final=False,
                  double=False):
         self.text = text
-        self.viewtype = viewtype
+        self.view_answer_type = view_answer_type
         self.score_original = score_original
         self.category = category
         self.row = row

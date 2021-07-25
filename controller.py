@@ -26,10 +26,11 @@ from sqlalchemy.sql.functions import current_date
 
 from ceopardy import db
 from config import config
-from model import Answer, Game, Team, GameState, Question, QuestionContent, ContentMedia, AnswerContent, Response, \
+from model import Answer, Game, Team, GameState, Question, QuestionContent, AnswerContent, Response, \
     State, \
     FinalQuestion
-from utils import parse_question_id, parse_questions, parse_gamefile, parse_answers, render_content_view
+from utils import parse_question_id, parse_questions, parse_gamefile, parse_answers, render_content_view, \
+    render_answer_view
 
 
 class Controller():
@@ -338,7 +339,7 @@ class Controller():
         htmlQuestion = {}
         if qid != '':
             col, row, view = parse_question_id(qid)
-            viewId=int(view)
+            viewId = int(view)
             if int(view) > 0:
                 question = Controller.get_question_and_content(col, row, view)
                 questionContents = []
@@ -374,12 +375,12 @@ class Controller():
         return answer
 
     @staticmethod
-    def get_answer_content(qid):
+    def get_answer_content(qid, view_answer_type):
         app.logger.info(
             "Get answer content by question id: {}".format(qid))
 
         answers = AnswerContent.query.filter(AnswerContent.question_id == qid).all()
-        return render_content_view(answers[0].text, answers)
+        return render_answer_view(view_answer_type, answers[0].text, answers)
 
     @staticmethod
     def get_question_viewid_from_dbid(question_id):
