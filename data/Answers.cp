@@ -2,7 +2,7 @@
 Elton John;image:Elton_John_2011_Shankbone_2.jpeg
 Tom Hanks;image:90er-filmstars-heute-tom-hanks.jpg
 Korrekte Reihenfolge;text:Liebesgrüße aus Moskau - (1963);text:Der Spion der mich liebte - (1977);text:Octopussy - (1983);text:Goldeneye- (1995);text:Keine Zeit zu sterben - (2021)
-Michael Jackson - Thriller;image:Michael_Jackson_-_Thriller.png
+~70.000.000;image:Michael_Jackson_-_Thriller.png
 Queen - We are the champions;music:yt1s.com - Queen  We Are The Champions Official Live Video_192kbpsoriginal.mp3
 
 >Sport
