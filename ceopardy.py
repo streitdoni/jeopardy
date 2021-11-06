@@ -200,7 +200,7 @@ def handle_initial_question(data):
         col, row, view = utils.parse_question_id(data["id"])
         question = controller.get_question_and_content(col, row, view)
         answer = controller.get_answer(col, row)
-        answerContent = controller.get_answer_content(question.id,question.view_answer_type)
+        answerContent = controller.get_answer_content(question.id, question.description)
         controller.set_state("question", data["id"])
         emit("question", {"action": "show",
                           "category": question.category},
@@ -226,7 +226,7 @@ def handle_question_content(data):
     else:
         vId = int(vId) - 1
 
-    content,lastViewId =controller.get_selected_question_view(col, row, vId)
+    content, lastViewId = controller.get_selected_question_view(col, row, vId)
     controller.set_state("question", utils.deparse_question_id(col, row, vId))
     emit("nextQuestion", {"content": content},
          namespace='/viewer', broadcast=True)
@@ -239,7 +239,7 @@ def load_answer_content(data):
     controller = get_controller()
     col, row, vId = utils.parse_question_id(data["id"])
     question = controller.get_question_and_content(col, row, vId)
-    answerContent = controller.get_answer_content(question.id, question.view_answer_type)
+    answerContent = controller.get_answer_content(question.id, question.description)
     emit("nextQuestion", {"content": answerContent},
          namespace='/viewer', broadcast=True)
     return {"id": utils.deparse_question_id(col, row, vId), "lastid": controller.get_view_content_count(question.id),
