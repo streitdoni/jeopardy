@@ -23,11 +23,11 @@ config = {
     'CATEGORIES_PER_GAME': 5,
     'QUESTIONS_PER_CATEGORY': 5,
     'QUESTIONS_FILENAME': 'data/Questions.cp',
-    'ANSWERS_FILENAME': 'data/Answers.cp',
+    'ANSWERS_FILENAME': 'data/Answers_old.cp',
     'IMAGES_FOLDER': 'static/data/images/',
     'SOUNDS_FOLDER': 'static/data/sounds/',
     'SOUND_ANIMATION':'static/data/images/mp3bars.gif',
-    'SCORE_TICK': 100,
+    'SCORE_TICK': 200,
     'MESSAGES': [ \
         {"title": "Game not started",
          "text": "Please wait while the game is being set up..."},
