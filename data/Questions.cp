@@ -1,35 +1,35 @@
 >Unterhaltung
-TextAndContent;Welcher Musiker ist gesucht?;1:image:1280px-Bruce_McCandless_II_during_EVA_in_1984.jpg;2:image:yamaha-b2-klavier-kirsch-holz.jpg;3:image:1920px-PACE_flag_(without_text).svg.png;4:image:PU2321FS006LFB_256897_2017-08-03_14-57-52.jpeg;5:image:903679_fancybox_1v7_p1_OCLlSk.jpg;6:image:Elton_John_2011_Shankbone_2.jpeg
+TextAndContent;Welcher Musiker ist gesucht?;1:image:yamaha-b2-klavier-kirsch-holz.jpg;2:image:1920px-PACE_flag_(without_text).svg.png;3:image:PU2321FS006LFB_256897_2017-08-03_14-57-52.jpeg;4:image:1280px-Bruce_McCandless_II_during_EVA_in_1984.jpg;5:image:903679_fancybox_1v7_p1_OCLlSk.jpg;6:image:Elton_John_2011_Shankbone_2.jpeg
 TextAndContent;Welche Person sagte folgendes:;1:text:"Amelia, wollen wir essen Happen? Happen essen?";2:text:"houston we have a problem";3:text:"Das Leben ist wie eine Schachtel Pralinen!";4:text:"Wilsoooon!"
 ListOfText;Ordnet die James Bond Titel in chronologischer Reihenfolge von alt nach neu;1:text:Octopussy;1:text:Der Spion der mich liebte;1:text:Keine Zeit zu sterben;1:text:Goldeneye;1:text:Liebesgrüße aus Moskau
 TextAndContent;Welcher dieser 3 Studioalben wurde am häufigsten verkauft?;1:text:The Beatles - Abbey Road;1:text:Michael Jackson - Thriller;1:text:Nirvana - Nevermind;1:image:Beatles_-_Abbey_Road.jpg;1:image:Michael_Jackson_-_Thriller.png;1:image:NirvanaNevermindalbumcover.jpg
 TextAndContent;Welcher Song wird hier rückwärts abgespielt?;1:music:yt1s.com - Queen  We Are The Champions Official Live Video_192kbps.mp3
 
 >Sport
-NoAnswer;Zu welchem Fussballverein gehört diese Torhymne?;1:music:1_FSV_Mainz_05_Torhymne_2020_21.mp3;2:music:FC_Augsburg_Torhymne_2020_21.mp3;3:music:SC_Paderborn_07_Torhymne_2020_21.mp3;4:music:SV_Werder_Bremen_Torhymne_2021_2022.mp3;5:music:FC_Schalke_04_Torhymne_2020_21.mp3;6:music:FC_Bayern_München_FC_Bayern_München_U23_Torhymne_2.mp3;7:music:Borussia_Dortmund_Torhymne_2020_21.mp3
+NoAnswer;Zu welchem Fussballverein gehört diese Torhymne?;1:music:1_FSV_Mainz_05_Torhymne_2020_21.mp3;2:text:FSV Mainz 05;3:music:FC_Augsburg_Torhymne_2020_21.mp3;4:text:FC Augsburg;5:music:SC_Paderborn_07_Torhymne_2020_21.mp3;6:text:SC Paderborn 07;7:music:SV_Werder_Bremen_Torhymne_2021_2022.mp3;8:text:Werder Bremen;9:music:FC_Schalke_04_Torhymne_2020_21.mp3;10:text:Schalke 04;11:music:FC_Bayern_München_FC_Bayern_München_U23_Torhymne_2.mp3;12:text:FC Bayern München;13:music:Borussia_Dortmund_Torhymne_2020_21.mp3;14:text:Borussia Dortmund
 TextAndContent;Wer war Torschützenkönig der dritten Liga in der Saison 2020/21?;1:image:Screenshot from 2021-07-25 18-39-53.png;2:image:Screenshot from 2021-07-25 18-48-10.png;3:image:gruenwalder_ima_030672.jpg;4:music:Sechzgermarsch_Nostalgie.mp3;5:image:sascha.jpg;6:image:seitfallzieher-von-sascha-moelders-tsv-1860-muenchen-aktion-einzelaktion-einzelbild-freisteller-ganzkoerperaufnahme-.jpg
 TextAndContent;Aus welchem Jahr stammt der älteste noch bestehende Weltrekord in der Leichtathletik?
 ListOfText;Ordnet diese Olympia Austragungsorte in chronologischer Reihenfolge;1:text: Sotschi;1:text:Atlanta;1:text:Calgary;1:text: Salt Lake City;1:text:Sydney
 ListOfText;Welche der dargestellten Olympia Sportarten werden zum ersten Mal ausgetragen?;1:image:Screenshot from 2021-07-25 22-24-13.png
 
 >Hagenhoff
-TextAndContent;TextTest1?;1:text:Text1;1:text:laaaaaa-aaaaaaaaaa aaaaaaaaaa aaaaaaa aaaaaaaaa aaaaaaa aaaaaaaaa aaaaaaa aangerText1;2:text:Text2;2:text:laaaaaa aaaaa aaaaaaaaaaaa aaaaaaaa aaaaaaaaaa aaaaaaaaaa aaaaaaaaaaaa aaaangerText2
-TextAndContent;Um welches Musikstück handelt es sich?;1:text:Jeopardy-theme-song.mp3;1:text:Elton_John_-_Candle_In_The_Wind_Goodbye_Englands_Rose_Qoret.com.mp3;2:text:asdfasdf3;2:text:Easdfasdfasdfasdfasdcom.mp3
-TextAndContent;Ordnet die James Bond Titel in chronologischer Reihenfolge von alt nach neu!;1:text:Der Morgen stirbt nie;1:text:Die another day;1:text:Goldfinger
-TextAndContent;Welcher dieser 3 Hits hat am meisten Platten verkauft?;1:text:Slim Shady;1:text:Madonna;1:text:Samy Deluxe
-TextAndContent;Welches Tatort Ermittlerpaar stand am häufigsten vo der Kamera?
+TextAndContent;Bestimmt das Durchschnittsalter aller auf der Hütte anwesenden Personen. Zur Info, Nora und Moritz fallen auch ins Gewicht!
+TextAndContent;Ordnet die Kirchen in eine sinnvolle Reihenfolge;1:image:meinolf_dörenhagen_Bearbeitet.jpg;1:image:Paderborner Dom_Bearbeitet.jpg;1:image:Meinolf_8203Bearbeitet.jpg;1:image:Westenholz_St._Joseph_Seitenansicht_Bearbeitet.jpg;1:image:steinheim_Bearbeitet.jpg
+TextAndContent;Wieviele Höhenmeter sind es vom Parkplatz bis zur Hütte? 
+TextAndContent;Aus  Jahr stammt dieses Foto?;1:image:2016.JPG;2:text:2016;3:image:1991.jpg;4:text:1991;5:image:1999.jpg;6:text:1999;7:image:2004.jpg;8:text:2004;9:image:1993_Okt.jpeg;10:text:1993;11:image:2015Papa.jpg;12:text:2015
+ListOfText;Ordnet die Weihnachtsfotos in chronologischer Reihenfolge von alt nach neu!;1:image:Weihnachten2014.JPG;1:image:Weihnachten1991.jpg;1:image:Weihnachten2016.JPG;1:image:Weihnachten_2015.JPG
 
 >Geographie
-TextAndContent;Welcher Musiker ist gesucht?
-TextAndContent;Um welches Musikstück handelt es sich?;1:text:Elton_John_2011_Shankbone_2.jpeg
-TextAndContent;Ordnet die James Bond Titel in chronologischer Reihenfolge von alt nach neu!;1:text:08-03_14-57-52.jpeg;1:text:PU2321FS006LFB_256897_2017-08-03_14-57-52.jpeg
-TextAndContent;Welcher dieser 3 Hits hat am meisten Platten verkauft?;1:text:08-03_14-57-52.jpeg;1:text:PU2321FS006LFB_256897_2017-08-03_14-57-52.jpeg;1:text:tada
-TextAndContent;Welches Tatort Ermittlerpaar stand am häufigsten vo der Kamera?;1:text:08-03_14-57-52.jpeg;1:text:PU23 1FS0 08-03_14-57-52.jpeg;1:text:tada;1:text:asd asdfa dfsd;1:text:Herr Bla und Frau Bla;1:text:Fräulein Grüneis
+TextAndContent;Zu welchen Ländern gehören diese Nationalhymnen?;1:music:Brazil_National_Anthem_English_lyrics.mp3;2:text:Brasilien;3:music:Russian_National_Anthem_Instrumental.mp3;4:text:Russland;5:music:Bolivia_National_Anthem_Instrumental_.mp3;6:text:Bolivien
+TextAndContent;Welches Land ist gesucht?;1:text:Die Bevölkerungsanzahl beläuft sich auf 16,5 Mio Menschen;2:text:Die Hälfte der Bevölkerung ist unter 15 Jahre alt;3:text:Die durchschnittliche Lebenserwartung ist 69,5 Jahre;4:text:Das Land verfügt über einer 433 km lange Küste;5:text:Das Nationalgericht heißt Amok, welches aus Reis, Kokoschreme, Kurkuma und Zitronengras besteht.;6:image:Screenshot from 2021-07-27 18-06-15.png;7:text:Der Fluss Mekong durchquert das komplette Land von Norden nach Süden;8:text:Die direkt angrenzenden Länder lauten Thailand, Vietnam und Laos;9:text:Das Land verfügt über die größte Tempelanlage der Welt (über 400km^2);10:text:Haupt Ethno-Linguistische Bevölkerungsgruppe neben den Cham, den Thais und den Laoten sind die Kmer;11:text:Die Hauptstadt heißt Phnom Penh
+TextAndContent;Welches Land ist gesucht?;2:text:Der Nationalfeiertag ist am 6. Juni - An diesem Tag wurde 1809 die erste Verfassung unterzeichnet;3:text:In deren Grundschulen werden Noten als Bewertungsschema erst nach der 6. Klasse vergeben.;4:text:12% des Landes sind von Wasserflächen bedeckt.;5:text:Die höchste Temperatur wurde am 29. Juni 1947 mit 38,0 Grad gemessen. Die tiefste Temperatur betrug am 02. Februar 1966 -52,6°C.;6:text:Das Alphabet besteht aus 29 Buchstaben. Auf das 'Z' folgen die Buchstaben 'Å', 'Ä' und Ö;7:text:In dessen Hauptstadt werden seit 1901 die Nobelpreise verliehen;8:text:Die nördlichste Stadt heißt Kiruna und befindet sich über dem Polarkreis;9:text:Es ist ein Königreich.
+TextAndContent;Welches Land ist gesucht?;1:text:Der höchste Berg des Landes hat 6.542 Meter;2:text:Das Land ist ein Rohstoffgarant für E-Mobilität;3:text:Im Durchscnitt hat fast jeder zweite Haushalt keinen Zugang zur Elektrizität;4:text:Im Jahr 2009 wurde das Land zu einem "Plurinationalen Staat" ernannt;5:text:Das Land ist der drittgrößte Kokainexporteur weltweit;6:text:Das Land hat keinen Meerzugang aber eine Marine
+TextAndContent;Welche Stadt ist hier abgebildet?;1:image:BerlinStadtumriss.png;2:image:BerlinStadtumriss.png;2:image:Screenshot from 2021-07-26 22-41-46.png;3:image:BarcelonaUmriss.png;4:image:BarcelonaUmriss.png;4:image:Screenshot from 2021-07-26 22-39-20.png;5:image:WienUmriss.png;6:image:WienUmriss.png;6:image:Screenshot from 2021-07-26 22-44-44.png;7:image:AmsterdamUmriss.png;8:image:AmsterdamUmriss.png;8:image:Screenshot from 2021-07-26 22-46-29.png;9:image:KopenhagenUmriss.png;10:image:KopenhagenUmriss.png;10:image:Screenshot from 2021-07-26 22-47-44.png
 
 >Bilderraten
-TextAndContent;Welcher Musiker ist gesucht?;1:text:Elton_John_2011_Shankbone_2.jpeg;2:text:PU2321FS006LFB_256897_2017-08-03_14-57-52.jpeg
-TextAndContent;Um welches Musikstück handelt es sich?;1:text:Jeopardy-theme-song.mp3;1:text:Elton_John_-_Candle_In_The_Wind_Goodbye_Englands_Rose_Qoret.com.mp3;2:text:asdfasdf3;2:text:Easdfasdfasdfasdfasdcom.mp3
-TextAndContent;Ordnet die James Bond Titel in chronologischer Reihenfolge von alt nach neu!;1:text:Der Morgen stirbt nie;1:text:Die another day;1:text:Goldfinger
-TextAndContent;Welcher dieser 3 Hits hat am meisten Platten verkauft?;1:text:Slim Shady;1:text:Madonna;1:text:Samy Deluxe
-TextAndContent;Welches Tatort Ermittlerpaar stand am häufigsten vo der Kamera?
+TextAndContent;Welche Person ist gesucht?;1:image:imago62565656h.jpg;1:image:43920-3-verstellbare_weidetore-105_170cm-voss-farming-massiv-laengenverstellbar.jpg
+TextAndContent;Welche Person ist gesucht?;1:image:von-drauss-vom-walde-kommt-er.jpg;1:image:zolux_vogelkooi_lisette_38_x_38_cm_staal_zwart_505681_1606401859.jpg
+TextAndContent;Welche Person ist gesucht?;1:image:142025783.jpg;1:image:Eine-Kraehe-laeuft-ueber-eine-Wiese-Foto-picture-alliance-751754h.jpg
+TextAndContent;Welche Person ist gesucht;1:image:Collegehut-Dr-Hut-Flexible-by-Lierys.95001_f4.jpg;1:image:Sitzkarussell_und_Schaukel_in_Aulzhausen.jpg
+TextAndContent;Welche Person ist gesucht?;1:image:media.media.5bfb02be-a2ac-4189-8f06-293de197155d.original1024.jpg;1:image:ludwig-II-620.jpg
 

@@ -117,8 +117,7 @@
             </div>
         </div>
 
-
-        <!-- --------------------------BOTTOM SECTION---------------------- -->
+            <!-- --------------------------BOTTOM SECTION---------------------- -->
         <div class="container-bottom container-all container-light">
 
             <div class="container-bottom-left">
@@ -451,23 +450,6 @@
             }
         }
 
-        function LoadNextQuestionContent(event) {
-            var id = $(this).parent().parent().attr('vId');
-            socket.emit('questionContent', {action: "next", id: id}, function (data) {
-
-                vId = parseInt(data.id.substring(data.id.indexOf('v') + 1));
-                if (data.lastid == vId) {
-                    hideMessageContentNavigation(hideprev = false, hidenext = true);
-                } else {
-                    hideMessageContentNavigation(hideprev = false, hidenext = false);
-                }
-                $("#question").html(data.content);
-                $(".question-content-view-container").attr("vId", data.id);
-
-
-            });
-
-        }
 
         function PlaySoundOfQuestion(event) {
 
@@ -505,6 +487,24 @@
             var audio = $("#currentQuestionSound").get(0);
             audio.pause();
             audio.currentTime = 0;
+
+        }
+
+        function LoadNextQuestionContent(event) {
+            var id = $(this).parent().parent().attr('vId');
+            socket.emit('questionContent', {action: "next", id: id}, function (data) {
+
+                vId = parseInt(data.id.substring(data.id.indexOf('v') + 1));
+                if (data.lastid == vId) {
+                    hideMessageContentNavigation(hideprev = false, hidenext = true);
+                } else {
+                    hideMessageContentNavigation(hideprev = false, hidenext = false);
+                }
+                $("#question").html(data.content);
+                $(".question-content-view-container").attr("vId", data.id);
+
+
+            });
 
         }
 

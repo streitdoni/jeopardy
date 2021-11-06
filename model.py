@@ -81,7 +81,7 @@ class ViewAnswerType(Enum):
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(255), nullable=False)
-    view_answer_type = db.Column(db.Enum(ViewAnswerType))
+    description = db.Column(db.Enum(ViewAnswerType), nullable=False)
     score_original = db.Column(db.Integer)
     category = db.Column(db.String(80))
     final = db.Column(db.Boolean)
@@ -93,10 +93,10 @@ class Question(db.Model):
     questionContents = db.relationship('QuestionContent')
     answerContents = db.relationship('AnswerContent')
 
-    def __init__(self, text, view_answer_type, score_original, category, row, col, final=False,
+    def __init__(self, text, description, score_original, category, row, col, final=False,
                  double=False):
         self.text = text
-        self.view_answer_type = view_answer_type
+        self.description = description
         self.score_original = score_original
         self.category = category
         self.row = row
@@ -115,14 +115,33 @@ class ContentMedia(Enum):
     text = 3
 
 
+class QuestionAnswerContentMapper(db.Model):
+    __tablename__ = 'questionanswercontentmapper'
+    id = db.Column(db.Integer, primary_key=True)
+    viewid = db.Column(db.Integer, nullable=False)
+
+    questioncontent = db.relationship('QuestionContent', back_populates="questionanswercontentmapper")
+    question_content_id = db.Column(db.Integer, db.ForeignKey('questioncontent.id'),nullable=False)
+    answercontent = db.relationship('AnswerContent', back_populates="questionanswercontentmapper")
+    answer_content_id = db.Column(db.Integer, db.ForeignKey('answercontent.id'), nullable=False)
+
+
+    def __init__(self, viewid, questionContent,answerContent):
+        self.viewid = viewid
+        self.questioncontent = questionContent
+        self.answercontent = answerContent
+
+
 class QuestionContent(db.Model):
+    __tablename__ = 'questioncontent'
     id = db.Column(db.Integer, primary_key=True)
     viewid = db.Column(db.Integer, nullable=False)
     media = db.Column(db.Enum(ContentMedia), nullable=False)
     content = db.Column(db.String(255), nullable=False)
-
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
     question = db.relationship('Question', back_populates="questionContents")
+
+    questionanswercontentmapper = db.relationship("QuestionAnswerContentMapper", back_populates="questioncontent",uselist=False)
 
     def __init__(self, viewid, media, content, question):
         self.viewid = viewid
@@ -132,13 +151,15 @@ class QuestionContent(db.Model):
 
 
 class AnswerContent(db.Model):
+    __tablename__ = 'answercontent'
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.Integer, nullable=False)
     media = db.Column(db.Enum(ContentMedia), nullable=False)
     content = db.Column(db.String(255), nullable=False)
-
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
     question = db.relationship('Question', back_populates="answerContents")
+
+    questionanswercontentmapper = db.relationship("QuestionAnswerContentMapper", back_populates="answercontent",uselist=False)
 
     def __init__(self, text, media, content, question):
         self.text = text

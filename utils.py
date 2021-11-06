@@ -20,7 +20,7 @@ import glob
 import html
 import os
 import re
-import string
+import json
 
 from config import config
 from model import ContentMedia, ViewAnswerType
@@ -129,6 +129,26 @@ def parse_answers(filename):
     return answers
 
 
+def parse_answers_new(filename):
+    """Parses a answer file.
+       Returns a dict (of categories) of lists of questions (in score order)
+    """
+    # TODO should drop the old format entirely?
+    # if so use html and integrate answers into question file
+    # people can then use asciidoctor or markdown to render questions from
+    # a simpler format
+    answers = []
+    cur_category = None
+    try:
+        with open(filename, 'r') as f:
+            result = json.loads(f.read())
+            return result
+    except Exception as e:
+        context = "Problem parsing the answer file: {}".format(filename)
+        raise AnswerParsingError(context)(e)
+
+
+
 def parse_gamefile(filename):
     """Parses a game file. A game file holds the categories that are going to be
         played in order.
@@ -190,7 +210,7 @@ def parse_question_id(qid):
     Parses a question id in the form category X question Y and view Z(cXqYvZ) and
     returns a triple with category, question, and current view or None if it didn't work.
     """
-    match = re.match("c([0-9]+)q([0-9]+)v([0-9])", qid)
+    match = re.match("c([0-9]+)q([0-9]+)v([0-9]+)", qid)
     if match is None:
         raise InvalidQuestionId("Invalid Question Id: {}".format(qid))
     col, row, content = match.groups()

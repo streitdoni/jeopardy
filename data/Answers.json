@@ -1,0 +1,27 @@
+{
+  "Category": "Unterhaltung",
+  "Answers": [
+    {
+      "ViewId": 0,
+      "ViewType": "TextAndContent",
+      "Text": "Elton John",
+      "Content": [
+        {
+          "Type": "image",
+          "Content": "Elton_John_2011_Shankbone_2.jpeg"
+        }
+      ]
+    },
+    {
+      "ViewId": 0,
+      "ViewType": "TextAndContent",
+      "Text": "Tom Hanks",
+      "Content": [
+        {
+          "Type": "image",
+          "Content": "90er-filmstars-heute-tom-hanks.jpg"
+        }
+      ]
+    }
+  ]
+}
