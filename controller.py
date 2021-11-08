@@ -55,6 +55,7 @@ class Controller():
             db.session.add(State("question", ""))
             db.session.add(State("container-header", "slide-down"))
             db.session.add(State("container-footer", "slide-up"))
+
             db.session.commit()
 
     @staticmethod
@@ -90,6 +91,17 @@ class Controller():
             db.session.query(Team).filter_by(tid=_id).update({"name": _name})
         db.session.commit()
 
+    @staticmethod
+    def update_question_scores(scale,direction):
+        logTerm = 'down' if direction == 0 else 'up'
+        app.logger.info("Update scores by scale {} by: {}".format(logTerm,scale))
+
+        for question in Question.query.all():
+            if direction == 0:
+                question.score = question.score / scale
+            else:
+                question.score = question.score*2
+        db.session.commit()
     @staticmethod
     def setup_questions(round_file, q_file=config['QUESTIONS_FILENAME']):
         app.logger.info("Setup questions from file: {}".format(q_file))

@@ -20,6 +20,7 @@
 import functools
 import logging
 import random
+import requests
 import re
 import sys
 
@@ -30,6 +31,7 @@ from flask_sqlalchemy import SQLAlchemy
 import utils
 from config import config
 from forms import TeamNamesForm, TEAM_FIELD_ID
+
 
 VERSION = "0.1.0"
 
@@ -244,6 +246,18 @@ def load_answer_content(data):
          namespace='/viewer', broadcast=True)
     return {"id": utils.deparse_question_id(col, row, vId), "lastid": controller.get_view_content_count(question.id),
             "content": answerContent}
+
+@socketio.on('adaptScoreFactor', namespace='/host')
+def adapt_score_factor(data):
+
+    controller = get_controller()
+    scale = int(data["scale"])
+    direction = int(data["direction"])
+    controller.update_question_scores(scale,direction)
+
+
+
+
 
 
 @socketio.on('message', namespace='/host')

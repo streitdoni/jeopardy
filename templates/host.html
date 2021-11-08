@@ -106,7 +106,13 @@
                                             {% endfor %}
                                         </div>
                                         <div class="box-question-right">
-                                            <p>${{ _r * SCORE_TICK }}</p>
+                                            {% set score_factor =  state.get('score-factor','')|int %}
+                                            {% if score_factor == 0 %}
+                                            {% set score = _r * SCORE_TICK %}
+                                            {% else %}
+                                            {% set score = (_r * SCORE_TICK) * score_factor %}
+                                            {% endif %}
+                                            <p>{{ score }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -177,6 +183,12 @@
                                 </div>
                                 <div id="buzz-lock" class="form-icon form-click" title="Lock buzzers">
                                     <i class="fa fa-lock fa-2x fa-fw"></i>
+                                </div>
+                                <div id="increase-score" class="form-icon form-click" title="Increase score by 1">
+                                    <i class="fa fa-chevron-up fa-2x"></i>
+                                </div>
+                                <div id="decrease-score" class="form-icon form-click" title="Decrease score by 1">
+                                    <i class="fa fa-chevron-down fa-2x"></i>
                                 </div>
                                 {# TODO this button can be made a lot more intuitive #}
                                 <div id="results-submit" class="form-icon form-click" title="Submit score">
@@ -752,6 +764,20 @@
             }
         }
 
+        function AdaptScoreFactor(direction,scale){
+            direction = parseInt(direction)
+            scale = parseInt(scale)
+            const questionBoxes = document.querySelectorAll(".box-question-right");
+	            for (const questionBox of questionBoxes) {
+	             var currentscore = parseInt(questionBox.children[0].innerHTML);
+                 if (direction==0){
+                     questionBox.children[0].innerHTML = (currentscore / scale).toString();
+                 }else{
+                     questionBox.children[0].innerHTML = (currentscore * scale).toString();
+                 }
+                }
+        }
+
         $(document).ready(function () {
             $(".box-question-host").on("click", ClickQuestion);
 
@@ -785,6 +811,18 @@
             $('.team-range').on("click", function () {
                 // TODO if question is unanswered, toggle unlock
                 console.log($(this).val());
+            });
+
+            $('#increase-score').on("click", function(e){
+                socket.emit('adaptScoreFactor', {direction: 1,scale:2}, function (data) {
+                    AdaptScoreFactor(1,2)
+            });
+            });
+
+            $('#decrease-score').on("click", function(e){
+                socket.emit('adaptScoreFactor', {direction: 0,scale:2}, function (data) {
+                    AdaptScoreFactor(0,2)
+            });
             });
 
             $('#results-submit').on("click", SubmitResults);
@@ -821,9 +859,7 @@
             $("#stop-sound").on("click", StopSoundOfQuestion);
             if (($('.box-selected').length) > 0) {
                 hideMessageContentNavigation(hideprev = true, hidenext = false);
-                $('.')
             } else {
-
                 hideMessageContentNavigation(hideprev = true, hidenext = true);
             }
 

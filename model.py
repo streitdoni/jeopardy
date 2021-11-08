@@ -82,7 +82,7 @@ class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Enum(ViewAnswerType), nullable=False)
-    score_original = db.Column(db.Integer)
+    score = db.Column(db.Integer)
     category = db.Column(db.String(80))
     final = db.Column(db.Boolean)
     double = db.Column(db.Boolean)
@@ -93,11 +93,11 @@ class Question(db.Model):
     questionContents = db.relationship('QuestionContent')
     answerContents = db.relationship('AnswerContent')
 
-    def __init__(self, text, description, score_original, category, row, col, final=False,
+    def __init__(self, text, description, score, category, row, col, final=False,
                  double=False):
         self.text = text
         self.description = description
-        self.score_original = score_original
+        self.score = score
         self.category = category
         self.row = row
         self.col = col
@@ -193,7 +193,7 @@ class Answer(db.Model):
 
     def __init__(self, response, team, question):
         """Meant to be used on normal questions where score is not changeable"""
-        self.score_attributed = question.score_original
+        self.score_attributed = question.score
         self.response = response
         self.team = team
         self.question = question

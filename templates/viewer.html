@@ -27,7 +27,13 @@
                             {% set answered = questions['c{}q{}'.format(_c, _r)] == True %}
                             <div class="col-ceopardy flex-horizontal-pad">
                                 <div id="c{{ _c }}q{{ _r }}" class="box-ceopardy box-question-viewer" role="button">
-                                    <p class="{{ 'answered' if answered }}">${{ _r * SCORE_TICK }}</p>
+                                            {% set score_factor =  state.get('score-factor','')|int %}
+                                            {% if score_factor == 0 %}
+                                            {% set score = _r * SCORE_TICK %}
+                                            {% else %}
+                                            {% set score = (_r * SCORE_TICK) * score_factor %}
+                                            {% endif %}
+                                    <p class="{{ 'answered' if answered }}">{{ score }}</p>
                                 </div>
                             </div>
                         {% endfor %}
