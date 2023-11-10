@@ -112,9 +112,10 @@ class Controller():
             questions = parse_questions(config['BASE_DIR'] + q_file)
 
             # TODO do some validation based on config constants
+            scorelevels=config['SCORE_LEVELS']
             for _col, _cat in enumerate(gamefile, start=1):
                 for _row, _q in enumerate(questions[_cat], start=1):
-                    score = _row * config['SCORE_TICK']
+                    score = scorelevels[(_row-1)]
 
                     question = Question(_q['text'], _q['description'], score, _cat, _row, _col)
                     db.session.add(question)

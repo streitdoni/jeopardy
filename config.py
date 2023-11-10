@@ -27,7 +27,7 @@ config = {
     'IMAGES_FOLDER': 'static/data/images/',
     'SOUNDS_FOLDER': 'static/data/sounds/',
     'SOUND_ANIMATION':'static/data/images/mp3bars.gif',
-    'SCORE_TICK': 200,
+    'SCORE_LEVELS': [200,400,600,800,1400],
     'MESSAGES': [ \
         {"title": "Game not started",
          "text": "Please wait while the game is being set up..."},
