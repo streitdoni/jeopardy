@@ -1,6 +1,6 @@
 >Unterhaltung
-TextAndContent;0:Elton John:image:Elton_John_2011_Shankbone_2.jpeg
 TextAndContent;0:Tom Hanks:image:90er-filmstars-heute-tom-hanks.jpg
+TextAndContent;0:Elton John:image:Elton_John_2011_Shankbone_2.jpeg
 ListOfText;0:Korrekte Reihenfolge:text:Liebesgrüße aus Moskau - (1963):text:Der Spion der mich liebte - (1977):Korrekte Reihenfolge:text:Octopussy - (1983):Korrekte Reihenfolge:text:Goldeneye- (1995):Korrekte Reihenfolge:text:Keine Zeit zu sterben - (2021)
 TextAndContent;0:~70.000.000:image:Michael_Jackson_-_Thriller.png
 TextAndContent;0:Queen - We are the champions:music:yt1s.com - Queen  We Are The Champions Official Live Video_192kbpsoriginal.mp3
