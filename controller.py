@@ -300,6 +300,25 @@ class Controller():
                     .order_by(Question.col)]
 
     @staticmethod
+    def get_score_board_row_wise(numCategories):
+        result=[]
+        scores=   [r.score for r in db.session.query(Question).order_by(Question.score.asc())]
+
+        i=numCategories
+        scorerow=[]
+        for score in scores:
+            scorerow.append(score)
+            i=i-1
+            if i==0:
+                i=numCategories
+                result.append(scorerow)
+                scorerow=[]
+
+
+
+        return result
+
+    @staticmethod
     def get_view_content_count(questionId):
         app.logger.info(
             "Number of occurences in Queactive_questionstionContent based on question_id  {}".format(questionId))

@@ -106,12 +106,7 @@
                                             {% endfor %}
                                         </div>
                                         <div class="box-question-right">
-                                            {% set score_factor =  state.get('score-factor','')|int %}
-                                            {% if score_factor == 0 %}
-                                            {% set score = _r * SCORE_TICK %}
-                                            {% else %}
-                                            {% set score = (_r * SCORE_TICK) * score_factor %}
-                                            {% endif %}
+                                            {% set score = allscores[_r-1][_c-1] %}
                                             <p>{{ score }}</p>
                                         </div>
                                     </div>
@@ -207,7 +202,7 @@
             <form id="form-question" class="container-bottom-middle">
                 {% set results = questions.get(select_qid, {}) %}
                 {% set select_tid = state.get('team', '') %}
-                {% for name, score in scores.items() %}
+                {% for name, score in teamscores.items() %}
                     {% set tid = 'team{}'.format(loop.index) %}
                     <div class="container-bottom-team" style="height: 100%;">
                         <div team="{{ tid }}" id="{{ tid }}-other"
@@ -252,7 +247,7 @@
                                     </div>
                                     <div class="box-team-side">
                                         <div id="{{ tid }}-score" class="box-ceopardy-colorless box-score"><p>
-                                            ${{ scores.get(name, 0) }}</p></div>
+                                            ${{ teamscores.get(name, 0) }}</p></div>
                                     </div>
                                 </div>
                             </div>
@@ -764,18 +759,20 @@
             }
         }
 
-        function AdaptScoreFactor(direction,scale){
-            direction = parseInt(direction)
-            scale = parseInt(scale)
+        function AdaptScoreFactor(scores,numCategories){
             const questionBoxes = document.querySelectorAll(".box-question-right");
-	            for (const questionBox of questionBoxes) {
-	             var currentscore = parseInt(questionBox.children[0].innerHTML);
-                 if (direction==0){
-                     questionBox.children[0].innerHTML = (currentscore / scale).toString();
-                 }else{
-                     questionBox.children[0].innerHTML = (currentscore * scale).toString();
-                 }
+            i=0;
+            j=0;
+            for (const questionBox of questionBoxes) {
+                questionBox.children[0].innerHTML = scores[j][i].toString();
+                if (i== (numCategories-1)){
+                     i=0;
+                     j++;
+                }else
+                {
+                i++;
                 }
+            }
         }
 
         $(document).ready(function () {
@@ -815,13 +812,13 @@
 
             $('#increase-score').on("click", function(e){
                 socket.emit('adaptScoreFactor', {direction: 1,scale:2}, function (data) {
-                    AdaptScoreFactor(1,2)
+                    AdaptScoreFactor(data.scores, data.numCategories)
             });
             });
 
             $('#decrease-score').on("click", function(e){
                 socket.emit('adaptScoreFactor', {direction: 0,scale:2}, function (data) {
-                    AdaptScoreFactor(0,2)
+                    AdaptScoreFactor(data.scores, data.numCategories)
             });
             });
 

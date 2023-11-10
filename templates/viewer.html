@@ -26,13 +26,8 @@
                         {% for _c in range(1, CATEGORIES_PER_GAME + 1) %}
                             {% set answered = questions['c{}q{}'.format(_c, _r)] == True %}
                             <div class="col-ceopardy flex-horizontal-pad">
-                                <div id="c{{ _c }}q{{ _r }}" class="box-ceopardy box-question-viewer" role="button">
-                                            {% set score_factor =  state.get('score-factor','')|int %}
-                                            {% if score_factor == 0 %}
-                                            {% set score = _r * SCORE_TICK %}
-                                            {% else %}
-                                            {% set score = (_r * SCORE_TICK) * score_factor %}
-                                            {% endif %}
+                                <div id="c{{ _c }}q{{ _r }}" class="box-ceopardy box-question-viewer box-question" role="button">
+                                       {% set score = allscores[_r-1][_c-1] %}
                                     <p class="{{ 'answered' if answered }}">{{ score }}</p>
                                 </div>
                             </div>
@@ -46,7 +41,7 @@
 
         <div class="container-results">
             {% set select_tid = state.get('team', '') %}
-            {% for name, score in scores.items() %}
+            {% for name, score in teamscores.items() %}
                 {% set tid = 'team{}'.format(loop.index) %}
                 <div class="container-team">
                     <div id="{{ tid }}" class="black-box flex-pad {{ 'team-selected' if select_tid == tid }}"
@@ -151,6 +146,8 @@
             $("#question-overlay").fadeIn(1000);
         })
 
+
+
         socket.on('overlay', function (data) {
             if (data.action == "show") {
                 $("#" + data.id + "-overlay-content").html(data.html);
@@ -161,6 +158,24 @@
             }
         });
 
+        socket.on('updateScoreboard', function (content) {
+            scores=content.scores;
+            numCategories=content.numCategories;
+            const questionBoxes = document.querySelectorAll(".box-question");
+            i=0;
+            j=0;
+            for (const questionBox of questionBoxes) {
+                questionBox.children[0].innerHTML = scores[j][i].toString();
+                if (i== (numCategories-1)){
+                     i=0;
+                     j++;
+                }else
+                {
+                i++;
+                }
+            }
+
+        })
         socket.on('team', function (data) {
             if ((data.action == "name") || (data.action == "score")) {
                 for (var key in data.args) {

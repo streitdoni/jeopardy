@@ -56,14 +56,15 @@ def inject_config():
 @app.route('/viewer')
 def viewer():
     controller = get_controller()
-    scores = controller.get_teams_score()
+    teamscores = controller.get_teams_score()
     categories = controller.get_categories()
     questions = controller.get_questions_status_for_viewer()
     state = controller.get_complete_state()
+    scores = controller.get_score_board_row_wise(config['CATEGORIES_PER_GAME'])
     question = controller.get_active_question(ishost=False)
-    return render_template('viewer.html', scores=scores, categories=categories,
+    return render_template('viewer.html', teamscores=teamscores, categories=categories,
                            questions=questions, state=state,
-                           active_question=question)
+                           active_question=question, allscores=scores)
 
 
 # TODO we must kill all client-side state on server load.
@@ -82,7 +83,8 @@ def host():
 
     # TODO these objects need a major clean up for improved consistency
     # and reduced overhead
-    scores = controller.get_teams_score()
+    teamscores = controller.get_teams_score()
+    scores = controller.get_score_board_row_wise(config['CATEGORIES_PER_GAME'])
     teams = controller.get_teams_for_form()
     form = TeamNamesForm(data=teams)
     categories = controller.get_categories()
@@ -90,9 +92,9 @@ def host():
     state = controller.get_complete_state()
     question = controller.get_active_question(ishost=True)
 
-    return render_template('host.html', scores=scores, teams=teams, form=form,
+    return render_template('host.html', teamscores=teamscores, teams=teams, form=form,
                            categories=categories, questions=questions,
-                           state=state, active_question=question)
+                           state=state, active_question=question, allscores=scores)
 
 
 # For now, this will give un an initial state which will avoid complications when
@@ -254,7 +256,12 @@ def adapt_score_factor(data):
     scale = int(data["scale"])
     direction = int(data["direction"])
     controller.update_question_scores(scale,direction)
+    numCategories=config['CATEGORIES_PER_GAME']
+    scores = controller.get_score_board_row_wise(numCategories)
 
+    emit("updateScoreboard", {"scores": scores, "numCategories": numCategories},
+         namespace='/viewer', broadcast=True)
+    return {"scores": scores, "numCategories": numCategories}
 
 
 

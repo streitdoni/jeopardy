@@ -652,11 +652,10 @@ img {
     line-height: 90%;
 }
 
-.box-question-viewer {
+ .box-question-viewer {
     cursor: pointer;
     overflow: hidden;
 }
-
 .box-category-host p {
     color: #ffffff;
     text-shadow: 2px 2px 0px #000000;
