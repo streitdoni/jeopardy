@@ -1,35 +1,35 @@
 >Unterhaltung
-TextAndContent;Welcher Musiker ist gesucht?;1:image:yamaha-b2-klavier-kirsch-holz.jpg;2:image:1920px-PACE_flag_(without_text).svg.png;3:image:PU2321FS006LFB_256897_2017-08-03_14-57-52.jpeg;4:image:1280px-Bruce_McCandless_II_during_EVA_in_1984.jpg;5:image:903679_fancybox_1v7_p1_OCLlSk.jpg;6:image:Elton_John_2011_Shankbone_2.jpeg
-TextAndContent;Welche Person sagte folgendes:;1:text:"Amelia, wollen wir essen Happen? Happen essen?";2:text:"houston we have a problem";3:text:"Das Leben ist wie eine Schachtel Pralinen!";4:text:"Wilsoooon!"
-ListOfText;Ordnet die James Bond Titel in chronologischer Reihenfolge von alt nach neu;1:text:Octopussy;1:text:Der Spion der mich liebte;1:text:Keine Zeit zu sterben;1:text:Goldeneye;1:text:Liebesgrüße aus Moskau
+TextAndContent;Welche Person sagte folgendes:;1:text:"houston we have a problem";2:text:"Amelia, wollen wir essen Happen? Happen essen?";3:text:"Das Leben ist wie eine Schachtel Pralinen!";4:text:"Wilsoooon!"
+TextAndContent;Welcher Musiker ist gesucht?;1:image:yamaha-b2-klavier-kirsch-holz.jpg;2:image:1920px-PACE_flag_(without_text).svg.png;3:image:1280px-Bruce_McCandless_II_during_EVA_in_1984.jpg;4:image:PU2321FS006LFB_256897_2017-08-03_14-57-52.jpeg;5:image:903679_fancybox_1v7_p1_OCLlSk.jpg
+ListOfText;In welchem Jahr erschien der Lego Technik Bausatz?;1:image:legosilverchampion.jpg;2:text:2000;3:image:8880One.jpg;3:image:8880Two.jpg;4:text:1994;5:image:modelteamlego.jpg;6:text:1990;7:image:8485-1.jpg;8:text:1995;9:image:8865-1.jpg;10:text:1988
 TextAndContent;Welcher dieser 3 Studioalben wurde am häufigsten verkauft?;1:text:The Beatles - Abbey Road;1:text:Michael Jackson - Thriller;1:text:Nirvana - Nevermind;1:image:Beatles_-_Abbey_Road.jpg;1:image:Michael_Jackson_-_Thriller.png;1:image:NirvanaNevermindalbumcover.jpg
-TextAndContent;Welcher Song wird hier rückwärts abgespielt?;1:music:yt1s.com - Queen  We Are The Champions Official Live Video_192kbps.mp3
+ListOfText;Welche Fussballspieler erschein am häufigsten auf den FIFA Covers von 1994 bis 2023?;1:image:Mbappe.png;1:image:Ronaldinho.png;1:image:Messi.png;1:image:Ronaldo.png;1:image:Podolski.png
 
->Sport
-NoAnswer;Zu welchem Fussballverein gehört diese Torhymne?;1:music:1_FSV_Mainz_05_Torhymne_2020_21.mp3;2:text:FSV Mainz 05;3:music:FC_Augsburg_Torhymne_2020_21.mp3;4:text:FC Augsburg;5:music:SC_Paderborn_07_Torhymne_2020_21.mp3;6:text:SC Paderborn 07;7:music:SV_Werder_Bremen_Torhymne_2021_2022.mp3;8:text:Werder Bremen;9:music:FC_Schalke_04_Torhymne_2020_21.mp3;10:text:Schalke 04;11:music:FC_Bayern_München_FC_Bayern_München_U23_Torhymne_2.mp3;12:text:FC Bayern München;13:music:Borussia_Dortmund_Torhymne_2020_21.mp3;14:text:Borussia Dortmund
-TextAndContent;Wer war Torschützenkönig der dritten Liga in der Saison 2020/21?;1:image:Screenshot from 2021-07-25 18-39-53.png;2:image:Screenshot from 2021-07-25 18-48-10.png;3:image:gruenwalder_ima_030672.jpg;4:music:Sechzgermarsch_Nostalgie.mp3;5:image:sascha.jpg;6:image:seitfallzieher-von-sascha-moelders-tsv-1860-muenchen-aktion-einzelaktion-einzelbild-freisteller-ganzkoerperaufnahme-.jpg
-TextAndContent;Aus welchem Jahr stammt der älteste noch bestehende Weltrekord in der Leichtathletik?
-ListOfText;Ordnet diese Olympia Austragungsorte in chronologischer Reihenfolge;1:text: Sotschi;1:text:Atlanta;1:text:Calgary;1:text: Salt Lake City;1:text:Sydney
-ListOfText;Welche der dargestellten Olympia Sportarten werden zum ersten Mal ausgetragen?;1:image:Screenshot from 2021-07-25 22-24-13.png
+>Ultimate Fight Club
+TextAndContent;Wähle das Video mit den meisten Clicks auf PORNHUB;1:text:1, Schreibt euren Vorschlag auf den Zettel.;1:text:2. Wir geben exakt den von euch genannten Vorschlag in die Suchmaske ein.;1:text:3. Danach wird nach "most viewed" sortiert.;1:text: 4. Das erstgelistete Video zählt.;1:text:Ihr habt eine Minute Zeit.
+TextAndContent;Schätzt die Distanz der von euch erstellten Route!;1:text:1, Das beginnende Team nennt eine "Position" auf der Erde.;1:text:2. Das darauf folgende Team basierend darauf eine weitere "Position" usw.;1:text:3. Es ergibt sich eine Route, deren Länge ihr schätzen sollt;1:text:4. Wir zeigen jeden Punkt auf der Karte einmal;1:text:5. Für die Wahl der Position sowie für die Schätzung habt ihr jeweils eine Minute Zeit.
+TextAndContent;Nenne das eurer Meinung nach teuerste Produkt auf AMAZON;1:text:1, Schreibt euren Vorschlag auf den Zettel.;1:text:2. Wir geben exakt den von euch genannten Vorschlag in die Suchmaske ein.;1:text:3. Danach wird nach "Preis absteigend" sortiert.;1:text: 4. Das erstgelistete Produkt zählt.;1:text:Ihr habt eine Minute Zeit.
+TextAndContent;Schätzt die Distanz der von euch erstellten Route!;1:text:1, Das beginnende Team nennt eine "Position" auf der Erde.;1:text:2. Das darauf folgende Team basierend darauf eine weitere "Position" usw.;1:text:3. Es ergibt sich eine Route, deren Länge ihr schätzen sollt;1:text:4. Wir zeigen jeden Punkt auf der Karte einmal;1:text:5. Für die Wahl der Position sowie für die Schätzung habt ihr jeweils eine Minute Zeit.
+TextAndContent;Wähle das Video mit den meisten Clicks auf YOUTUBE;1:text:1, Schreibt euren Vorschlag auf den Zettel.;1:text:2. Wir geben exakt den von euch genannten Vorschlag in die Suchmaske ein.;1:text:3. Danach wird nach "most viewed" sortiert.;1:text:Ihr habt eine Minute Zeit.
 
->Hagenhoff
-TextAndContent;Bestimmt das Durchschnittsalter aller auf der Hütte anwesenden Personen. Zur Info, Nora und Moritz fallen auch ins Gewicht!
-TextAndContent;Ordnet die Kirchen in eine sinnvolle Reihenfolge;1:image:meinolf_dörenhagen_Bearbeitet.jpg;1:image:Paderborner Dom_Bearbeitet.jpg;1:image:Meinolf_8203Bearbeitet.jpg;1:image:Westenholz_St._Joseph_Seitenansicht_Bearbeitet.jpg;1:image:steinheim_Bearbeitet.jpg
-TextAndContent;Wieviele Höhenmeter sind es vom Parkplatz bis zur Hütte? 
-TextAndContent;Aus  Jahr stammt dieses Foto?;1:image:2016.JPG;2:text:2016;3:image:1991.jpg;4:text:1991;5:image:1999.jpg;6:text:1999;7:image:2004.jpg;8:text:2004;9:image:1993_Okt.jpeg;10:text:1993;11:image:2015Papa.jpg;12:text:2015
-ListOfText;Ordnet die Weihnachtsfotos in chronologischer Reihenfolge von alt nach neu!;1:image:Weihnachten2014.JPG;1:image:Weihnachten1991.jpg;1:image:Weihnachten2016.JPG;1:image:Weihnachten_2015.JPG
+>Reverse
+TextAndContent;Wie lautet dieser Song (Der Titel reicht uns aus)?;1:music:PumucklSongReverse.mp3
+TextAndContent;Wie lautet dieser Song (Der Titel reicht uns aus)?;1:music:yt1s.com - Queen  We Are The Champions Official Live Video_192kbps.mp3
+TextAndContent;Wie lautet dieser Song (Der Titel reicht uns aus)?;1:music:JuressicParkOneReverse.mp3;2:music:JuressicParkTwoReverse.mp3
+TextAndContent;Wie lautet dieser Song (Der Titel reicht uns aus)?;1:music:TeenageDirtbagOneReverse.mp3;2:music:TeenageDirtbagTwoReverse.mp3
+TextAndContent;Wie lautet dieser Song (Der Titel reicht uns aus)?;1:music:LemonTreeReverse.mp3
 
->Geographie
-TextAndContent;Zu welchen Ländern gehören diese Nationalhymnen?;1:music:Brazil_National_Anthem_English_lyrics.mp3;2:text:Brasilien;3:music:Russian_National_Anthem_Instrumental.mp3;4:text:Russland;5:music:Bolivia_National_Anthem_Instrumental_.mp3;6:text:Bolivien
+>Sauf den Dreck sonst Punkte weg
+TextAndContent;Wer ist der Pumpgott?;1:text:Wir wollen wissen, wer am meinsten Wiederholungen schafft;1:text:Jedes Team wählt eine Person aus;1:text: Diese Person müssen an der Kurzhantel alles geben!;1:text: Der die meisten Wiederholungen schafft gewinnt!
 TextAndContent;Welches Land ist gesucht?;1:text:Die Bevölkerungsanzahl beläuft sich auf 16,5 Mio Menschen;2:text:Die Hälfte der Bevölkerung ist unter 15 Jahre alt;3:text:Die durchschnittliche Lebenserwartung ist 69,5 Jahre;4:text:Das Land verfügt über einer 433 km lange Küste;5:text:Das Nationalgericht heißt Amok, welches aus Reis, Kokoschreme, Kurkuma und Zitronengras besteht.;6:image:Screenshot from 2021-07-27 18-06-15.png;7:text:Der Fluss Mekong durchquert das komplette Land von Norden nach Süden;8:text:Die direkt angrenzenden Länder lauten Thailand, Vietnam und Laos;9:text:Das Land verfügt über die größte Tempelanlage der Welt (über 400km^2);10:text:Haupt Ethno-Linguistische Bevölkerungsgruppe neben den Cham, den Thais und den Laoten sind die Kmer;11:text:Die Hauptstadt heißt Phnom Penh
 TextAndContent;Welches Land ist gesucht?;2:text:Der Nationalfeiertag ist am 6. Juni - An diesem Tag wurde 1809 die erste Verfassung unterzeichnet;3:text:In deren Grundschulen werden Noten als Bewertungsschema erst nach der 6. Klasse vergeben.;4:text:12% des Landes sind von Wasserflächen bedeckt.;5:text:Die höchste Temperatur wurde am 29. Juni 1947 mit 38,0 Grad gemessen. Die tiefste Temperatur betrug am 02. Februar 1966 -52,6°C.;6:text:Das Alphabet besteht aus 29 Buchstaben. Auf das 'Z' folgen die Buchstaben 'Å', 'Ä' und Ö;7:text:In dessen Hauptstadt werden seit 1901 die Nobelpreise verliehen;8:text:Die nördlichste Stadt heißt Kiruna und befindet sich über dem Polarkreis;9:text:Es ist ein Königreich.
 TextAndContent;Welches Land ist gesucht?;1:text:Der höchste Berg des Landes hat 6.542 Meter;2:text:Das Land ist ein Rohstoffgarant für E-Mobilität;3:text:Im Durchscnitt hat fast jeder zweite Haushalt keinen Zugang zur Elektrizität;4:text:Im Jahr 2009 wurde das Land zu einem "Plurinationalen Staat" ernannt;5:text:Das Land ist der drittgrößte Kokainexporteur weltweit;6:text:Das Land hat keinen Meerzugang aber eine Marine
 TextAndContent;Welche Stadt ist hier abgebildet?;1:image:BerlinStadtumriss.png;2:image:BerlinStadtumriss.png;2:image:Screenshot from 2021-07-26 22-41-46.png;3:image:BarcelonaUmriss.png;4:image:BarcelonaUmriss.png;4:image:Screenshot from 2021-07-26 22-39-20.png;5:image:WienUmriss.png;6:image:WienUmriss.png;6:image:Screenshot from 2021-07-26 22-44-44.png;7:image:AmsterdamUmriss.png;8:image:AmsterdamUmriss.png;8:image:Screenshot from 2021-07-26 22-46-29.png;9:image:KopenhagenUmriss.png;10:image:KopenhagenUmriss.png;10:image:Screenshot from 2021-07-26 22-47-44.png
 
->Bilderraten
-TextAndContent;Welche Person ist gesucht?;1:image:imago62565656h.jpg;1:image:43920-3-verstellbare_weidetore-105_170cm-voss-farming-massiv-laengenverstellbar.jpg
-TextAndContent;Welche Person ist gesucht?;1:image:von-drauss-vom-walde-kommt-er.jpg;1:image:zolux_vogelkooi_lisette_38_x_38_cm_staal_zwart_505681_1606401859.jpg
-TextAndContent;Welche Person ist gesucht?;1:image:142025783.jpg;1:image:Eine-Kraehe-laeuft-ueber-eine-Wiese-Foto-picture-alliance-751754h.jpg
-TextAndContent;Welche Person ist gesucht;1:image:Collegehut-Dr-Hut-Flexible-by-Lierys.95001_f4.jpg;1:image:Sitzkarussell_und_Schaukel_in_Aulzhausen.jpg
-TextAndContent;Welche Person ist gesucht?;1:image:media.media.5bfb02be-a2ac-4189-8f06-293de197155d.original1024.jpg;1:image:ludwig-II-620.jpg
+>Scherzfragen
+TextAndContent;Finde die Antwort zu folgender Scherzfrage;1:text:Was machen zwei Schafe die Streit miteinander haben?
+TextAndContent;Finde die Antwort zu folgender Scherzfrage;1:text:Wie kann man einen Liter Wasser in einem Sieb transportieren?
+TextAndContent;Finde die Antwort zu folgender Scherzfrage;1:text:Was sitzt immer faul in der oberen rechten Ecke und reist doch um die ganze Welt?
+TextAndContent;Finde die Antwort zu folgender Scherzfrage;1:text:Was kommt raus wen man eine Schlange und einen Igel kreuzt?
+TextAndContent;Finde die Antwort zu folgender Scherzfrage;1:text:Warum klaut Robin Hood Deo?
 

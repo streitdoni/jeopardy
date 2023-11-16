@@ -18,16 +18,16 @@
 import os
 
 config = {
-    'NB_TEAMS': 3,
+    'NB_TEAMS': 4,
     'VARIABLE_TEAMS': False,
     'CATEGORIES_PER_GAME': 5,
     'QUESTIONS_PER_CATEGORY': 5,
     'QUESTIONS_FILENAME': 'data/Questions.cp',
-    'ANSWERS_FILENAME': 'data/Answers_old.cp',
+    'ANSWERS_FILENAME': 'data/Answers.cp',
     'IMAGES_FOLDER': 'static/data/images/',
     'SOUNDS_FOLDER': 'static/data/sounds/',
     'SOUND_ANIMATION':'static/data/images/mp3bars.gif',
-    'SCORE_LEVELS': [200,400,600,800,1400],
+    'SCORE_LEVELS': [200,400,600,800,1000],
     'MESSAGES': [ \
         {"title": "Game not started",
          "text": "Please wait while the game is being set up..."},
