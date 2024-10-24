@@ -28,3 +28,7 @@ database where transactions are pushed when the hosts submit the points. This
 has the flipside requiring games to be finalized before a new one can be
 started. Make sure that you always push the "Game over" button before
 reloading to start a new game.
+
+## Version Compatibility
+Install Python 3.6  and run
+python3.6 -m venv env
