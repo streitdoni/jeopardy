@@ -1,9 +1,9 @@
->Unterhaltung
-Tom Hanks;image:90er-filmstars-heute-tom-hanks.jpg
-Elton John;image:Elton_John_2011_Shankbone_2.jpeg
-Korrekte Reihenfolge der Lego Technik Bausätze:;text:Bild 1 - (2000);text:Bild 2 - (1994);text:Bild 3 - (1990);text:Bild 4 - (1995);text:Bild 5 - (1988)
-~70.000.000;image:Michael_Jackson_-_Thriller.png
-Fifa Cover Erscheinungen 1994 - 2023:;text:Ronaldinho - (04, 06, 07, 08, 09) = 5 Mal;text:Messi - (13, 14, 15, 16) = 4 Mal;text:Podolski - (06, 07, 12) =3 Mal;text:Mbappe - (21, 22, 23) = 3 Mal;text:C. Ronaldo - (18, 19) = 2 Mal
+>Sprichwörter
+Antwort;text:Wer A sagt muss auch B sagen!
+Antwort;text:Wenn sich zwei streiten freut sich der dritte
+Antwort;text:Besser ein Ende mit Schrecken als ein Schrecken ohne Ende
+Antwort;text:Do schaugst wiar a Schwaiberl wenn's blitzt
+Antwort;text:Alte Liebe rostet nicht
 
 >Ultimate Fight Club
 Die meisten Clicks;text:Pornhub
@@ -12,12 +12,12 @@ Das teuerste Produkt;text:Amazon
 Distanz schätzen;text:Zweite Runde
 Die meisten Clicks;text:Youtube
 
->Reverse
-Meister Eder und sein Pumukel (Intro);music:Pumuckl.mp3
-Queen - We are the champions;music:yt1s.com - Queen  We Are The Champions Official Live Video_192kbpsoriginal.mp3
-Jurassic Park - Welcome to Jurassic Park;music:WelcomeToJurassicPark.mp3
-Wheatus - Teenage Dirtbag;music:WheatusTeenageDirtbag.mp3
-Fools Garden - Lemon Tree;music:Fools GardenLemonTree.mp3
+>Wer bin ich
+Antwort;text:Dart
+Antwort;text:Jurassic Park
+Antwort;text:Loonie Toons
+Antwort;text:Loveparade
+Antwort;text:Oceans Eleven
 
 >Sauf den Dreck sonst Punkte weg
 Hantelkontest;text:Wer schafft am meisten Wiederholungen

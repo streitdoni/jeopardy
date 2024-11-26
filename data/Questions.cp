@@ -1,9 +1,9 @@
->Unterhaltung
-TextAndContent;Welche Person sagte folgendes:;1:text:"houston we have a problem";2:text:"Amelia, wollen wir essen Happen? Happen essen?";3:text:"Das Leben ist wie eine Schachtel Pralinen!";4:text:"Wilsoooon!"
-TextAndContent;Welcher Musiker ist gesucht?;1:image:yamaha-b2-klavier-kirsch-holz.jpg;2:image:1920px-PACE_flag_(without_text).svg.png;3:image:1280px-Bruce_McCandless_II_during_EVA_in_1984.jpg;4:image:PU2321FS006LFB_256897_2017-08-03_14-57-52.jpeg;5:image:903679_fancybox_1v7_p1_OCLlSk.jpg
-ListOfText;In welchem Jahr erschien der Lego Technik Bausatz?;1:image:legosilverchampion.jpg;2:text:2000;3:image:8880One.jpg;3:image:8880Two.jpg;4:text:1994;5:image:modelteamlego.jpg;6:text:1990;7:image:8485-1.jpg;8:text:1995;9:image:8865-1.jpg;10:text:1988
-TextAndContent;Welcher dieser 3 Studioalben wurde am häufigsten verkauft?;1:text:The Beatles - Abbey Road;1:text:Michael Jackson - Thriller;1:text:Nirvana - Nevermind;1:image:Beatles_-_Abbey_Road.jpg;1:image:Michael_Jackson_-_Thriller.png;1:image:NirvanaNevermindalbumcover.jpg
-ListOfText;Welche Fussballspieler erschein am häufigsten auf den FIFA Covers von 1994 bis 2023?;1:image:Mbappe.png;1:image:Ronaldinho.png;1:image:Messi.png;1:image:Ronaldo.png;1:image:Podolski.png
+>Sprichwörter
+TextAndContent;Nenne das Sprichwort:;1:image:03-a-b.png
+TextAndContent;Nenne das Sprichwort:;1:image:04-streit-freude.png
+TextAndContent;Nenne das Sprichwort:;1:image:05-ende-schrecken.png
+TextAndContent;Nenne das Sprichwort:;1:image:01-01-schwalbe.png;1:image:01-02-blitzer.png
+TextAndContent;Nenne das Sprichwort:;1:image:02-01-alteliebe.png;1:image:02-02-rost.png
 
 >Ultimate Fight Club
 TextAndContent;Wähle das Video mit den meisten Clicks auf PORNHUB;1:text:1, Schreibt euren Vorschlag auf den Zettel.;1:text:2. Wir geben exakt den von euch genannten Vorschlag in die Suchmaske ein.;1:text:3. Danach wird nach "most viewed" sortiert.;1:text: 4. Das erstgelistete Video zählt.;1:text:Ihr habt eine Minute Zeit.
@@ -12,12 +12,12 @@ TextAndContent;Nenne das eurer Meinung nach teuerste Produkt auf AMAZON;1:text:1
 TextAndContent;Schätzt die Distanz der von euch erstellten Route!;1:text:1, Das beginnende Team nennt eine "Position" auf der Erde.;1:text:2. Das darauf folgende Team basierend darauf eine weitere "Position" usw.;1:text:3. Es ergibt sich eine Route, deren Länge ihr schätzen sollt;1:text:4. Wir zeigen jeden Punkt auf der Karte einmal;1:text:5. Für die Wahl der Position sowie für die Schätzung habt ihr jeweils eine Minute Zeit.
 TextAndContent;Wähle das Video mit den meisten Clicks auf YOUTUBE;1:text:1, Schreibt euren Vorschlag auf den Zettel.;1:text:2. Wir geben exakt den von euch genannten Vorschlag in die Suchmaske ein.;1:text:3. Danach wird nach "most viewed" sortiert.;1:text:Ihr habt eine Minute Zeit.
 
->Reverse
-TextAndContent;Wie lautet dieser Song (Der Titel reicht uns aus)?;1:music:PumucklSongReverse.mp3
-TextAndContent;Wie lautet dieser Song (Der Titel reicht uns aus)?;1:music:yt1s.com - Queen  We Are The Champions Official Live Video_192kbps.mp3
-TextAndContent;Wie lautet dieser Song (Der Titel reicht uns aus)?;1:music:JuressicParkOneReverse.mp3;2:music:JuressicParkTwoReverse.mp3
-TextAndContent;Wie lautet dieser Song (Der Titel reicht uns aus)?;1:music:TeenageDirtbagOneReverse.mp3;2:music:TeenageDirtbagTwoReverse.mp3
-TextAndContent;Wie lautet dieser Song (Der Titel reicht uns aus)?;1:music:LemonTreeReverse.mp3
+>Wer bin ich
+TextAndContent;Wer bin ich?;1:text:Ich stamme aus dem Vereinigten Königreich;2:text:Les fléchettes heiße ich bei den Franzosen;3:text:Zumeist werde ich mit Eisen durchbohrt.;4:text:Heutezutage bin ich international in solchen Räumlichkeiten zu Hause;4:image:03-01-kneipe.png;5:text:Ich habe 82 Felder;6:text:Ich bin nicht bei den Olympischen Spielen vertreten;7:text:Bei mir kann man bis zu 20 Punkte erreichen zuzüglich Verdoppelung und Verdreifachung;8:text:60 Punkte Punkte kann ich mit einem Wurf erreichen
+TextAndContent;Wer bin ich?;1:image:Joseph-Mazzello.png;2:image:Ariana-Richards.png;3:image:Bob-Peck.png;4:image:Martin-Ferrero.png;5:image:Laura-Dern.png;6:image:Wayne-Knight.png;7:image:Sam-Neill.png;8:image:Richard-Attenborough;9:image:Jeff-Goldblum;10:image:Bradley-Darryl-Wong;11:image:Samuel-L-Jackson;12:image:Steven-Spielberg
+TextAndContent;Wer bin ich?;1:text:Pepé Le Pew;2:text:Barnyard Dawg;3:text:Penelope Pussycat;4:text:Foghorn Leghorn;5:text:Henery Hawk;6:text:Elmer Fudd;7:text:Taz;8:text:Wile E. Coyote;9:text:Yosemite Sam;10:text:Sylvester;11:text:Road Runner;12:text:Speedy Gonzales;13:text:Tweety;14:text:Bugs Bunny
+TextAndContent;Wer bin ich?;1:text:Am 1. Juli 1989 feierte ich meinen ersten Geburtstag mit 150 Leuten;2:text:Zu meiner Hochzeit hatte ich bis zu 1.5 Mio Besucher;3:image:03-04-tunnel.png;4:text:Ich bin ein Berliner Kindl;5:image:02-01-pride.png;6:music:03-04-techno.mp3;7:image:03-04-dr-motte.png;7:text:Dr. Motte;8:image:03-04-loveparade.png
+TextAndContent;Wer bin ich?;
 
 >Sauf den Dreck sonst Punkte weg
 TextAndContent;Wer ist der Pumpgott?;1:text:Wir wollen wissen, wer am meinsten Wiederholungen schafft;1:text:Jedes Team wählt eine Person aus;1:text: Diese Person müssen an der Kurzhantel alles geben!;1:text: Der die meisten Wiederholungen schafft gewinnt!
