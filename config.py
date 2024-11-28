@@ -18,7 +18,7 @@
 import os
 
 config = {
-    'NB_TEAMS': 4,
+    'NB_TEAMS': 3,
     'VARIABLE_TEAMS': False,
     'CATEGORIES_PER_GAME': 5,
     'QUESTIONS_PER_CATEGORY': 5,
